@@ -32,7 +32,7 @@ Route::prefix('admins')->group(function () {
         Route::get('', 'Admins\CategoryController@index')->name('admincategory');
         Route::get('new', 'Admins\CategoryController@new')->name('admincategorynew');
         Route::get('edit/{id}', 'Admins\CategoryController@edit')->name('admincategoryedit');
-        Route::post('save', 'Admins\CategoryController@save')->name('admincategorysave');
+        Route::post('save', 'Admins\CategoryController@create')->name('admincategorysave');
         Route::put('update/{id}', 'Admins\CategoryController@update')->name('admincategoryupdate');
         Route::delete('delete/{id}', 'Admins\CategoryController@delete')->name('admincategorydelete');
     });

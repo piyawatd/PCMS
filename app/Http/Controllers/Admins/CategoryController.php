@@ -40,7 +40,12 @@ class CategoryController extends Controller
         $category = New Category();
         $category->name_th = $request->input('name_th');
         $category->name_en = $request->input('name_en');
-        $category->detail = $request->input('detail');
+        $category->detail_th = $request->input('detail_th');
+        $category->detail_en = $request->input('detail_en');
+        $category->alias = $request->input('alias');
+        $category->image = $request->input('image');
+        $category->order_number = $request->input('order_number');
+        $category->status = True;
         $category->save();
         return redirect()->route('admincategory')->with('success', 'category saved!');
 
