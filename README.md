@@ -9,7 +9,7 @@ Multi language cms use laravel framework.
 - ckeditor 4.13.0
 - Bootstrap - SB Admin 2 v4.0.7 [Overview](https://startbootstrap.com/template-overviews/sb-admin-2)
 - Bootstrap v4.3.1 [Overview](https://getbootstrap.com)
-- jQuery 3.4.1 
+- jQuery 3.5.0 
 
 ## Command
 หลังจาก clone project แล้วใช้คำสั่ง
