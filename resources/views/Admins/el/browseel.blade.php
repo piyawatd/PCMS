@@ -10,22 +10,21 @@
 </head>
 <body style="margin:0; padding:0;">
     <div id="elfinder"></div>
-	<script data-main="/public/elFinder/main.js" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
-	<script src="{{asset('/assets/js/dataservice.js')}}"></script>
+    <script data-main="{{asset('/elFinder/main.js')}}" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
+	<script src="{{asset('js/dataservice.js')}}"></script>
 	<script>
 			define('elFinderConfig', {
 				// elFinder options (REQUIRED)
 				// Documentation for client options:
 				// https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
 				defaultOpts : {
-					url : '/public/elFinder/php/connector.minimal.php' // connector URL (REQUIRED),
+                    url : '{{asset('/elFinder/php/connector.minimal.php')}}' // connector URL (REQUIRED),
 					,width: '99%'
                     ,height: '99%'
                     ,resizable: false
                     ,rememberLastDir: false
                     ,useBrowserHistory : false
                     ,uploadMaxSize : '10M'
-                    // ,startPath: '/public/userfiles/images/questionnaire'
                     <?php
                         $pathfolder = $type;
                         if($folder != ''){

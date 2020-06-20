@@ -13,9 +13,9 @@ class FileManagerController extends Controller
         return view('Admins.el.manager',['navsel' => 'file']);
     }
 
-//    public function elbrowse(Request $request){
-//        return view('Admins.el.browseel',['type' => $request->input('type'),'folder' => $request->input('folder')]);
-//    }
+    public function elbrowse(Request $request){
+        return view('Admins.el.browseel',['type' => $request->input('type'),'folder' => $request->input('folder')]);
+    }
 //
     public function ckbrowse(Request $request){
         return view('Admins.el.browseck',['type' => 'content','CKEditorFuncNum' => $request->input('CKEditorFuncNum')]);
