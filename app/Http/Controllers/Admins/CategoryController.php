@@ -33,11 +33,34 @@ class CategoryController extends Controller
         return view('Admins.category.form',['navsel' => 'category','mode' => 'edit','category' => Category::find($id)]);
     }
 
+    public function checkAlias(Request $request){
+        $count = Category::where('alias',$request->input('value'))
+            ->count();
+        $result = new \stdClass;
+        $result->value = false;
+        if($count > 0){
+            $result->value = true;
+        }
+        return response()->json($result);
+    }
+
     public function create(Request $request){
+        $category = New Category();
+        $this->updateDatabase($category,$request);
+        return redirect()->route('admincategory')->with('success', 'category saved!');
+
+    }
+
+    public function update($id,Request $request){
+        $category = Category::find($id);
+        $this->updateDatabase($category,$request);
+        return redirect()->route('admincategory')->with('success', 'category updated!');
+    }
+
+    public function updateDatabase(Category $category,Request $request){
         $request->validate([
             'name_th'=>'required'
         ]);
-        $category = New Category();
         $category->name_th = $request->input('name_th');
         $category->name_en = $request->input('name_en');
         $category->detail_th = $request->input('detail_th');
@@ -47,19 +70,6 @@ class CategoryController extends Controller
         $category->order_number = $request->input('order_number');
         $category->status = True;
         $category->save();
-        return redirect()->route('admincategory')->with('success', 'category saved!');
-
-    }
-
-    public function update($id,Request $request){
-        $request->validate([
-            'title'=>'required'
-        ]);
-        $category = Category::find($id);
-        $category->title = $request->input('title');
-        $category->detail = $request->input('detail');
-        $category->save();
-        return redirect()->route('admincategory')->with('success', 'category updated!');
     }
 
     public function delete($id){
