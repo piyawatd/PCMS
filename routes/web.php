@@ -28,6 +28,7 @@ Route::post('file/upload', 'FormControlController@upload')->name('file.upload');
 Route::prefix('admins')->group(function () {
     Route::get('', 'Admins\AdminController@index')->name('adminindex');
 
+//    Category
     Route::prefix('category')->group(function () {
         Route::get('', 'Admins\CategoryController@index')->name('admincategory');
         Route::get('new', 'Admins\CategoryController@new')->name('admincategorynew');
@@ -37,6 +38,20 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\CategoryController@delete')->name('admincategorydelete');
         Route::get('checkAlias', 'Admins\CategoryController@checkAlias')->name('checkcategoryalias');
     });
+//User
+    Route::prefix('user')->group(function () {
+        Route::get('', 'Admins\UserController@index')->name('userindex');
+        Route::get('new', 'Admins\UserController@new')->name('usernew');
+        Route::get('edit/{id}', 'Admins\UserController@edit')->name('useredit');
+        Route::get('profile', 'Admins\UserController@profile')->name('userprofile');
+        Route::post('updateprofile', 'Admins\UserController@updateprofile')->name('userupdateprofile');
+        Route::get('userall', 'Admins\UserController@all')->name('userall');
+        Route::post('create', 'Admins\UserController@create')->name('usercreate');
+        Route::post('update/{id}', 'Admins\UserController@update')->name('userupdate');
+        Route::delete('delete/{id}', 'Admins\UserController@delete')->name('userdelete');
+        Route::get('checkUsername', 'Admins\UserController@checkUsername')->name('usercheckUsername');
+    });
+
 
     Route::prefix('file')->group(function() {
         Route::get('filemanager', 'Admins\FileManagerController@manager')->name('filemanager');
