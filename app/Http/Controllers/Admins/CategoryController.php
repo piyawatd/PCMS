@@ -36,12 +36,11 @@ class CategoryController extends Controller
     public function checkAlias(Request $request){
         $count = Category::where('alias',$request->input('value'))
             ->count();
-        $result = new \stdClass;
-        $result->value = false;
+        $result['result'] = false;
         if($count > 0){
-            $result->value = true;
+            $result['value'] = true;
         }
-        return response()->json($result);
+        return $result;
     }
 
     public function create(Request $request){
