@@ -1,31 +1,38 @@
 @extends('Admins.layouts.template')
 @section('title')
     SB Admin 2 - Category
-    @if ($mode == 'new')
-        SB Admin 2 - Category - เพิ่ม
-    @else
-        SB Admin 2 - Category - แก้ไข {{$category->name_th}}
-    @endif
+@endsection
+@section('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('stylesheet')
     <link href="{{asset('/css/form-validation.css')}}" rel="stylesheet">
 @endsection
 @section('content')
+    <?php
+    $headertitle = ' - เพิ่ม';
+    $linkurl = route('admincategorysave');
+    if ($mode == 'edit'){
+        $headertitle = ' - แก้ไข '.$category->name_th;
+        $linkurl = route('admincategoryupdate',['id'=>$category->id]);
+    }
+    ?>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Category</h1>
+        <h1 class="h3 mb-0 text-gray-800">Category{{$headertitle}}</h1>
     </div>
 
     <!-- Content Row -->
     <div class="row">
         <div class="col-md-8">
-            <form class="needs-validation" novalidate method="post" action="{{route('admincategorysave')}}">
+            <form class="needs-validation" id="formdata" novalidate method="post" action="{{$linkurl}}">
                 @csrf
                 <div class="form-group row">
                     <label for="alias" class="col-md-2 col-form-label">Alias</label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" id="alias" name="alias" placeholder="Alias" value="{{$category->alias}}" required>
-                        <div class="invalid-feedback">
+                        <input type="hidden" id="currentalias" name="currentalias" value="{{$category->alias}}">
+                        <div class="invalid-feedback" id="validatealert">
                             Valid Alias is required.
                         </div>
                     </div>
@@ -104,7 +111,7 @@
                 </div>
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg" type="submit">Save</button>
-                <button class="btn btn-danger btn-lg" type="button">Cancel</button>
+                <a href="{{ route('admincategory') }}" class="btn btn-danger btn-lg">Cancel</a>
             </form>
         </div>
     </div>
@@ -114,6 +121,13 @@
     <script src="{{asset('/js/ckeditor.js')}}"></script>
     <script src="{{asset('/js/dataservice.js')}}"></script>
     <script type="text/javascript">
+
+        @if($mode == 'new')
+            var pass = false;
+        @else
+            var pass = true;
+        @endif
+
         CKEDITOR.replace( 'detail_th' , {
             height: 400,
             customConfig: "{{asset('/js/config.js')}}",
@@ -131,14 +145,53 @@
             $('#name_th').focusout(function(){
                 if($('#name_th').val() != '' && $('#alias').val() == ''){
                     $('#alias').val(replacetext($('#name_th').val()));
+                    checkalias();
                 }
             });
             $('#alias').focusout(function(){
                 if($('#alias').val() != ''){
                     $('#alias').val(replacetext($('#alias').val()));
+                    checkalias();
                 }
             });
+            $('#formdata').submit(function( event ) {
+                return pass;
+            });
         })
+
+        function checkalias() {
+            var alias = $.trim($('#alias').val());
+            if(alias != '')
+            {
+                if(alias != $('#currentalias').val())
+                {
+                    $.ajax({
+                        url: '{{route('checkcategoryalias')}}',
+                        method: "GET",
+                        cache: false,
+                        data: {
+                            "_token": $('meta[name="csrf-token"]').attr('content'),
+                            "value": alias
+                        },
+                        success:function (result) {
+                            if (result.value == true) {
+                                $('#alias').addClass('is-invalid');
+                                $('#validatealert').text('Alias is have use to other category.');
+                                pass = false;
+                            } else {
+                                $('#alias').removeClass('is-invalid');
+                                $('#validatealert').text('Valid Alias is required.');
+                                pass = true;
+                            }
+                        }
+                    });
+                }else{
+                    $('#alias').removeClass('is-invalid');
+                    $('#validatealert').text('Valid Alias is required.');
+                    pass = true;
+                }
+            }
+        }
 
         function addThumb() {
             window.open("{{route('elbrowse')}}?type=images&folder=thumbnail", "_blank", "toolbar=no,scrollbars=no,resizable=no,top=200,left=200,width=800,height=410");
