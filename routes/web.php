@@ -33,8 +33,9 @@ Route::prefix('admins')->group(function () {
         Route::get('new', 'Admins\CategoryController@new')->name('admincategorynew');
         Route::get('edit/{id}', 'Admins\CategoryController@edit')->name('admincategoryedit');
         Route::post('save', 'Admins\CategoryController@create')->name('admincategorysave');
-        Route::put('update/{id}', 'Admins\CategoryController@update')->name('admincategoryupdate');
+        Route::post('update/{id}', 'Admins\CategoryController@update')->name('admincategoryupdate');
         Route::delete('delete/{id}', 'Admins\CategoryController@delete')->name('admincategorydelete');
+        Route::get('checkAlias', 'Admins\CategoryController@checkAlias')->name('checkcategoryalias');
     });
 
     Route::prefix('file')->group(function() {
