@@ -9,6 +9,7 @@
 
     <title>@yield('title')</title>
     <!-- Bootstrap Core CSS -->
+    @yield('meta')
     @include('Admins.layouts.inc-stylesheet')
     @yield('stylesheet')
 </head>
