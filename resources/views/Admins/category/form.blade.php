@@ -1,6 +1,6 @@
 @extends('Admins.layouts.template')
 @section('title')
-    SB Admin 2 - Category
+    SB Admin 2 - หมวดสินค้า
 @endsection
 @section('meta')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -19,7 +19,7 @@
     ?>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Category{{$headertitle}}</h1>
+        <h1 class="h3 mb-0 text-gray-800">หมวดสินค้า{{$headertitle}}</h1>
     </div>
 
     <!-- Content Row -->
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="order_number" class="col-md-2 col-form-label">Order Number</label>
+                    <label for="order_number" class="col-md-2 col-form-label">ลำดับ</label>
                     <div class="col-md-10">
                         <input type="number" class="form-control" id="order_number" name="order_number" placeholder="0" value="{{$category->order_number}}">
                         <div class="invalid-feedback">
@@ -48,10 +48,10 @@
                 </div>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" id="th-tab" data-toggle="tab" href="#tab-th" role="tab" aria-controls="tab-th" aria-selected="true">TH</a>
+                        <a class="nav-link active" id="th-tab" data-toggle="tab" href="#tab-th" role="tab" aria-controls="tab-th" aria-selected="true">ไทย</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="en-tab" data-toggle="tab" href="#tab-en" role="tab" aria-controls="tab-en" aria-selected="true">EN</a>
+                        <a class="nav-link" id="en-tab" data-toggle="tab" href="#tab-en" role="tab" aria-controls="tab-en" aria-selected="true">อังกฤษ</a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
@@ -59,16 +59,16 @@
                     <!-- TAB TH -->
                     <div class="tab-pane active" id="tab-th" role="tabpanel" aria-labelledby="tab-th">
                         <div class="form-group row">
-                            <label for="name_th" class="col-md-2 col-form-label">Name</label>
+                            <label for="name_th" class="col-md-2 col-form-label">ชื่อ</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" id="name_th" name="name_th" placeholder="Name Th" required value="{{$category->name_th}}">
+                                <input type="text" class="form-control" id="name_th" name="name_th" placeholder="ชื่อภาษาไทย" required value="{{$category->name_th}}">
                                 <div class="invalid-feedback">
                                     Valid name th is required.
                                 </div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="detail_th" class="col-md-2 col-form-label">Detail</label>
+                            <label for="detail_th" class="col-md-2 col-form-label">รายละเอียด</label>
                             <div class="col-md-10">
                                 <textarea class="form-control" id="detail_th" name="detail_th">{{$category->detail_th}}</textarea>
                             </div>
@@ -77,13 +77,13 @@
                     <!-- TAB EN -->
                     <div class="tab-pane" id="tab-en" role="tabpanel" aria-labelledby="tab-en">
                         <div class="form-group row">
-                            <label for="name_en" class="col-md-2 col-form-label">Name</label>
+                            <label for="name_en" class="col-md-2 col-form-label">ชื่อ</label>
                             <div class="col-md-10">
-                                <input type="text" class="form-control" id="name_en" name="name_en" placeholder="Name En" value="{{$category->name_en}}">
+                                <input type="text" class="form-control" id="name_en" name="name_en" placeholder="ชื่อภาษาอังกฤษ" value="{{$category->name_en}}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="detail_en" class="col-md-2 col-form-label">Detail</label>
+                            <label for="detail_en" class="col-md-2 col-form-label">รายละเอียด</label>
                             <div class="col-md-10">
                                 <textarea class="form-control" id="detail_en" name="detail_en">{{$category->detail_en}}</textarea>
                             </div>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="image" class="col-md-2 col-form-label">Image</label>
+                    <label for="image" class="col-md-2 col-form-label">รูป</label>
                     <div class="col-md-3">
                         <input type="text" class="form-control" id="image" name="image" value="{{$category->image}}" readonly>
                     </div>
@@ -110,8 +110,8 @@
                     </div>
                 </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg" type="submit">Save</button>
-                <a href="{{ route('admincategory') }}" class="btn btn-danger btn-lg">Cancel</a>
+                <button class="btn btn-primary btn-sm" type="submit">บันทึก</button>
+                <a href="{{ route('admincategory') }}" class="btn btn-danger btn-sm">ยกเลิก</a>
             </form>
         </div>
     </div>
