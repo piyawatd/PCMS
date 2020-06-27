@@ -72,31 +72,28 @@ class CategoryController extends Controller
     }
 
     public function delete($id){
+        $result['result'] = false;
         $category = Category::find($id);
-        $countContent = Content::where('category','=',$id)->count();
-        if ($countContent > 0){
-            $json_data = array(
-                "result" => false
-            );
-            echo json_encode($json_data);
-        }else{
-            $category->delete();
-            $json_data = array(
-                "result" => true
-            );
-            echo json_encode($json_data);
-        }
+//        $countContent = Content::where('category','=',$id)->count();
+//        if ($countContent == 0){
+            $category->status = False;
+            $category->save();
+            $result['result'] = true;
+//        }
+        return $result;
     }
 
-    public function all(Request $request)
+    public function list(Request $request)
     {
         // https://shareurcodes.com/blog/laravel%20datatables%20server%20side%20processing
         $columns = array(
-            0 => 'title',
-            1 => 'id',
+            0 => 'name_th',
+            1 => 'name_en',
+            2 => 'alias',
+            3 => 'id',
         );
 
-        $totalData = Category::count();
+        $totalData = Category::where('status',true)->count();
 
         $totalFiltered = $totalData;
 
@@ -107,7 +104,8 @@ class CategoryController extends Controller
 
         if(empty($request->input('search.value')))
         {
-            $categorys = Category::offset($start)
+            $categorys = Category::where('status',true)
+                ->offset($start)
                 ->limit($limit)
                 ->orderBy($order,$dir)
                 ->get();
@@ -115,14 +113,19 @@ class CategoryController extends Controller
         else {
             $search = $request->input('search.value');
 
-            $categorys =  Category::where('id','LIKE',"%{$search}%")
-                ->orWhere('title', 'LIKE',"%{$search}%")
+            $categorys =  Category::where('status',true)
+                ->orWhere('name_th', 'LIKE',"%{$search}%")
+                ->orWhere('name_en', 'LIKE',"%{$search}%")
+                ->orWhere('alias', 'LIKE',"%{$search}%")
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order,$dir)
                 ->get();
 
-            $totalFiltered = Category::where('title','LIKE',"%{$search}%")
+            $totalFiltered = Category::where('status',true)
+                ->orWhere('name_th', 'LIKE',"%{$search}%")
+                ->orWhere('name_en', 'LIKE',"%{$search}%")
+                ->orWhere('alias', 'LIKE',"%{$search}%")
                 ->count();
         }
 
@@ -131,12 +134,12 @@ class CategoryController extends Controller
         {
             foreach ($categorys as $category)
             {
-                $edit =  route('categoryedit',$category->id);
-
-                $nestedData['id'] = $category->id;
-                $nestedData['title'] = $category->title;
-                $nestedData['options'] = "&emsp;<a href='{$edit}' title='แก้ไข' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span></a>
-                                          &emsp;<a href='javascript:void(0);' title='ลบ' class='btn btn-danger'><span class='glyphicon glyphicon-trash' onclick=\"deleteitem('".$category->id."','".$category->title."');\"></span></a>";
+                $edit =  route('admincategoryedit',$category->id);
+                $nestedData['name_th'] = $category->name_th;
+                $nestedData['name_en'] = $category->name_en?:'';
+                $nestedData['alias'] = $category->alias;
+                $nestedData['order_number'] = $category->order_number;
+                $nestedData['options'] = "<a href=".$edit." title=\"แก้ไข\" class=\"btn btn-info btn-circle\"><i class=\"fas fa-edit\"></i></a>&emsp;<a href=\"javascript:deleteitem('".$category->id."','".$category->alias."');\" title=\"ลบ\" class=\"btn btn-danger btn-circle\"><i class=\"fas fa-trash\"></i></a>";
                 $data[] = $nestedData;
 
             }
