@@ -31,6 +31,7 @@ Route::prefix('admins')->group(function () {
 //    Category
     Route::prefix('category')->group(function () {
         Route::get('', 'Admins\CategoryController@index')->name('admincategory');
+        Route::get('list', 'Admins\CategoryController@list')->name('admincategorylist');
         Route::get('new', 'Admins\CategoryController@new')->name('admincategorynew');
         Route::get('edit/{id}', 'Admins\CategoryController@edit')->name('admincategoryedit');
         Route::post('save', 'Admins\CategoryController@create')->name('admincategorysave');
@@ -38,6 +39,18 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\CategoryController@delete')->name('admincategorydelete');
         Route::get('checkAlias', 'Admins\CategoryController@checkAlias')->name('checkcategoryalias');
     });
+//    Content
+    Route::prefix('content')->group(function () {
+        Route::get('', 'Admins\ContentController@index')->name('admincontent');
+        Route::get('list', 'Admins\ContentController@list')->name('admincontentlist');
+        Route::get('new', 'Admins\ContentController@new')->name('admincontentnew');
+        Route::get('edit/{id}', 'Admins\ContentController@edit')->name('admincontentedit');
+        Route::post('save', 'Admins\ContentController@create')->name('admincontentsave');
+        Route::post('update/{id}', 'Admins\ContentController@update')->name('admincontentupdate');
+        Route::delete('delete/{id}', 'Admins\ContentController@delete')->name('admincontentdelete');
+        Route::get('checkAlias', 'Admins\ContentController@checkAlias')->name('checkcontentalias');
+    });
+
 //User
     Route::prefix('user')->group(function () {
         Route::get('', 'Admins\UserController@index')->name('userindex');
