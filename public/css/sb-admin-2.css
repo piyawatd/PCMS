@@ -11006,3 +11006,4 @@ body.sidebar-toggled footer.sticky-footer {
 .nav-tabs {
     margin-bottom: 1rem;
 }
+th.dt-center, td.dt-center { text-align: center; }
