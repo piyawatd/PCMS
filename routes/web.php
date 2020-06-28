@@ -39,6 +39,18 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\CategoryController@delete')->name('admincategorydelete');
         Route::get('checkAlias', 'Admins\CategoryController@checkAlias')->name('checkcategoryalias');
     });
+
+//    CategoryContent
+    Route::prefix('categorycontent')->group(function () {
+        Route::get('', 'Admins\CategoryContentController@index')->name('admincategorycontent');
+        Route::get('list', 'Admins\CategoryContentController@list')->name('admincategorycontentlist');
+        Route::get('new', 'Admins\CategoryContentController@new')->name('admincategorycontentnew');
+        Route::get('edit/{id}', 'Admins\CategoryContentController@edit')->name('admincategorycontentedit');
+        Route::post('save', 'Admins\CategoryContentController@create')->name('admincategorycontentsave');
+        Route::post('update/{id}', 'Admins\CategoryContentController@update')->name('admincategorycontentupdate');
+        Route::delete('delete/{id}', 'Admins\CategoryContentController@delete')->name('admincategorycontentdelete');
+        Route::get('checkAlias', 'Admins\CategoryContentController@checkAlias')->name('checkcategorycontentalias');
+    });
 //    Content
     Route::prefix('content')->group(function () {
         Route::get('', 'Admins\ContentController@index')->name('admincontent');
