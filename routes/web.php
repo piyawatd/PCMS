@@ -57,6 +57,9 @@ Route::prefix('admins')->group(function () {
         Route::get('list', 'Admins\ContentController@list')->name('admincontentlist');
         Route::get('new', 'Admins\ContentController@new')->name('admincontentnew');
         Route::get('edit/{id}', 'Admins\ContentController@edit')->name('admincontentedit');
+        Route::put('publish/{id}', 'Admins\ContentController@publish')->name('admincontentpublish');
+        Route::get('gallery/{id}', 'Admins\ContentController@gallery')->name('admincontentgallery');
+        Route::post('galleryupdate/{id}', 'Admins\ContentController@galleryupdate')->name('admincontentgalleryupdate');
         Route::post('save', 'Admins\ContentController@create')->name('admincontentsave');
         Route::post('update/{id}', 'Admins\ContentController@update')->name('admincontentupdate');
         Route::delete('delete/{id}', 'Admins\ContentController@delete')->name('admincontentdelete');
