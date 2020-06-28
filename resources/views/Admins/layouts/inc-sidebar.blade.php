@@ -12,7 +12,8 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item active">
+  <li class="nav-item @if ($navsel===
+                'dashboard') active @endif">
     <a class="nav-link" href="{{ route('adminindex') }}">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
@@ -44,15 +45,18 @@
             <i class="fas fa-user fa-tachometer-alt"></i>
             <span>Customer</span></a>
     </li>
-    <li class="nav-item">
+
+    <li class="nav-item @if (($navsel===
+                'categorycontent') || ($navsel===
+                'category')) active @endif">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategory" aria-expanded="true" aria-controls="collapseCategory">
             <i class="fas fa-layer-group"></i>
             <span>Category</span>
         </a>
         <div id="collapseCategory" class="collapse" aria-labelledby="headingCategory" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="buttons.html">Content</a>
-                <a class="collapse-item" href="cards.html">Product</a>
+                <a class="collapse-item" href="{{ route('admincategorycontent') }}">Content</a>
+                <a class="collapse-item" href="{{ route('admincategory') }}">Product</a>
             </div>
         </div>
     </li>
