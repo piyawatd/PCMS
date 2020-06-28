@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admins;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Content;
+use App\Models\ContentGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -51,18 +52,36 @@ class ContentController extends Controller
     public function create(Request $request){
         $content = New Content();
         $this->updateDatabase($content,$request);
-        return redirect()->route('admincontent')->with('success', 'content saved!');
+        return redirect()->route('admincontent')->with('success', 'บันทึกบทความสำเร็จ!');
 
     }
 
     public function update($id,Request $request){
         $content = Content::find($id);
         $this->updateDatabase($content,$request);
-        return redirect()->route('admincontent')->with('success', 'content updated!');
+        return redirect()->route('admincontent')->with('success', 'อัพเดทบทความสำเร็จ!');
     }
 
     public function gallery($id){
-        return view('Admins.content.form',['navsel' => 'content','content' => Content::find($id)]);
+        $content = Content::find($id);
+        $gallery = ContentGallery::where('content',$id)->get();
+        return view('Admins.content.gallery',['navsel' => 'content','content'=>$content,'gallery' => $gallery]);
+    }
+
+    public function galleryupdate($id,Request $request){
+        $content = Content::find($id);
+        $gallery = ContentGallery::where('content',$id)->get();
+        foreach ($gallery as $item) {
+            $item->delete();
+        }
+        $imageg = $request->input('image');
+        for($i = 0; $i <= sizeof($imageg)-1;$i++) {
+            $qobj = new ContentGallery;
+            $qobj->image = $imageg[$i];
+            $qobj->content = $id;
+            $qobj->save();
+        }
+        return redirect()->route('admincontent')->with('success', 'บันทึก Gallery สำเร็จ');
     }
 
     public function updateDatabase(Content $content,Request $request){

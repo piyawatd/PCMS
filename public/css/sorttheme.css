@@ -1,0 +1,24 @@
+.swap-threshold-indicator {
+	background-color: #0079bf;
+	height: 100%;
+	display: inline-block;
+}
+
+.col {
+	padding-right: 0;
+	margin-right: 15px;
+}
+
+.sortable-chosen {
+	background-color: #ccc;
+}
+
+.selected {
+	background-color: #f9c7c8;
+	border: solid red 1px !important;
+	z-index: 1 !important;
+}
+
+.highlight {
+	background-color: #eee;
+}
