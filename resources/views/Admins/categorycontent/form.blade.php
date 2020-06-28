@@ -91,22 +91,23 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="image" class="col-md-2 col-form-label">รูป</label>
-                    <div class="col-md-3">
-                        <input type="text" class="form-control" id="image" name="image" value="{{$categorycontent->image}}" readonly>
-                    </div>
-                    <div class="col-md-4">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="addThumb()">Browse</button>
-                        <button type="button" class="btn btn-danger btn-sm d-none" id="delthumb" onclick="deletethumb()">Delete</button>
-                    </div>
                     <?php
                     $clssthumb = '';
                     if ($categorycontent->image == ''){
                         $clssthumb = 'd-none';
                     }
                     ?>
+                    <label for="image" class="col-md-2 col-form-label">รูป</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="image" name="image" value="{{$categorycontent->image}}" readonly>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="addThumb()">Browse</button>
+                        <button type="button" class="btn btn-danger btn-sm {{$clssthumb}}" id="delthumb" onclick="deletethumb()">Delete</button>
+                    </div>
+
                     <div class="col-sm-3 {{ $clssthumb }}" id="file-show">
-                        <img src="" id="imageShow" style="height: 180px;" class="thumbnail">
+                        <img src="{{$categorycontent->image}}" id="imageShow" style="height: 180px;" class="thumbnail">
                     </div>
                 </div>
                 <hr class="mb-4">
