@@ -18,7 +18,7 @@ class AdminController extends Controller
 	public function index(){
 	    App::setLocale('th');
         session(['page' => 'index']);
-        return view('Admins.admin.index');
+        return view('Admins.admin.index',['navsel'=>'dashboard']);
     }
 
 	public function table(){
