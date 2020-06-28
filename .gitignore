@@ -33,3 +33,4 @@ storage/*.key
 /public/upload/
 /rentproject.iml
 /pcms.iml
+/database/migrations/tableone/
