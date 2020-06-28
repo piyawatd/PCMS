@@ -124,7 +124,7 @@ $opts = array(
             'driver'        => 'LocalFileSystem',           // driver for accessing file system (REQUIRED)
             'path'          => '../../filemanager/',                 // path to files (REQUIRED)
             // 'URL'           => dirname($_SERVER['PHP_SELF']) . '/../../userfiles/', // URL to files (REQUIRED)
-            'URL'           => '../../public/filemanager/', // URL to files (REQUIRED)
+            'URL'           => '/public/filemanager/', // URL to files (REQUIRED)
             'trashHash'     => 't1_Lw',                     // elFinder's hash of trash folder
             'winHashFix'    => DIRECTORY_SEPARATOR !== '/', // to make hash same to Linux one on windows too
             'uploadDeny'    => array('all'),                // All Mimetypes not allowed to upload
