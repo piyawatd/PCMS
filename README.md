@@ -8,8 +8,10 @@ Multi language cms use laravel framework.
 - elFinder 2.1.50
 - ckeditor 4.13.0
 - Bootstrap - SB Admin 2 v4.0.7 [Overview](https://startbootstrap.com/template-overviews/sb-admin-2)
-- Bootstrap v4.3.1 [Overview](https://getbootstrap.com)
-- jQuery 3.5.0 
+- Bootstrap v4.3.1 [Document](https://getbootstrap.com)
+- jQuery 3.5.0
+- gijgo combined 1.9.13 [Document](https://gijgo.com/) 
+- jquery confirm v3.3.4 [Document](https://craftpip.github.io/jquery-confirm/)
 
 ## Command
 หลังจาก clone project แล้วใช้คำสั่ง

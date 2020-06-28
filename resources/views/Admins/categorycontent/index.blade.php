@@ -22,7 +22,7 @@
     <!-- Content Row -->
     <div class="row">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ชื่อภาษาไทย</th>
@@ -76,24 +76,35 @@
         }
 
         function deleteitem(id,title) {
-            var r = confirm("ต้องการลบ "+title+"?");
-            if (r == true) {
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ url('admins/categorycontent/delete') }}/"+id,
-                    dataType:"json",
-                    data:{ _token: "{{csrf_token()}}" },
-                    success: function(response){
-                        if(response.result == true)
-                        {
-                            alert('ลบสำเร็จ');
-                            clearall();
-                        }else{
-                            alert('มีบทความในหมวดนี้ ไม่สามารถลบได้');
+            $.confirm({
+                title: 'Confirm Delete!',
+                content: "ต้องการลบ "+title+" ?",
+                buttons: {
+                    confirm: function () {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "{{ url('admins/categorycontent/delete') }}/"+id,
+                            dataType:"json",
+                            data:{ _token: "{{csrf_token()}}" },
+                            success: function(response){
+                                if(response.result == true)
+                                {
+                                    $.alert('ลบสำเร็จ');
+                                    clearall();
+                                }else{
+                                    $.alert('มีบทความในหมวดนี้ ไม่สามารถลบได้');
+                                }
+                            }
+                        });
+                    },
+                    cancel:{
+                        btnClass: 'btn-red',
+                        action: function () {
+
                         }
                     }
-                });
-            }
+                }
+            });
         }
     </script>
 @endsection

@@ -18,8 +18,9 @@
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('adminindex') }}">
+    <li class="nav-item @if ($navsel===
+                'content') active @endif">
+        <a class="nav-link" href="{{ route('admincontent') }}">
             <i class="far fa-file-alt"></i>
             <span>Content</span></a>
     </li>
