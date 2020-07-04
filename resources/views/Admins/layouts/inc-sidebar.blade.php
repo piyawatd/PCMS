@@ -22,12 +22,12 @@
                 'content') active @endif">
         <a class="nav-link" href="{{ route('admincontent') }}">
             <i class="far fa-file-alt"></i>
-            <span>Content</span></a>
+            <span>บทความ</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('adminindex') }}">
+        <a class="nav-link" href="{{ route('adminproduct') }}">
             <i class="fab fa-product-hunt"></i>
-            <span>Product</span></a>
+            <span>สินค้า</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrder" aria-expanded="true" aria-controls="collapseOrder">
