@@ -60,7 +60,7 @@ class CreateContentsTable extends Migration
                 ->default(true)
                 ->nullable(true)
                 ->comment('ใช้งานหรือไม่');
-            $table->bigInteger('category_content')
+            $table->bigInteger('category')
                 ->comment('category');
             $table->timestamps();
         });

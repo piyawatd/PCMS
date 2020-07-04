@@ -9,11 +9,11 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="category_content" class="col-md-2 col-form-label">หมวด</label>
+    <label for="category" class="col-md-2 col-form-label">หมวด</label>
     <div class="col-md-10">
-        <select class="form-control" id="category_content" name="category_content">
+        <select class="form-control" id="category" name="category">
             @foreach ($category as $item)
-                <option value="{{ $item->id }}" @if($item->id == $content->category_content)selected="selected"@endif>{{ $item->name_th }}</option>
+                <option value="{{ $item->id }}" @if($item->id == $content->category)selected="selected"@endif>{{ $item->name_th }}</option>
             @endforeach
         </select>
     </div>

@@ -61,8 +61,8 @@
                     </div>
                 </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-sm" type="submit">Save</button>
-                <a href="{{ route('admincontent') }}" class="btn btn-danger btn-sm">Cancel</a>
+                <button class="btn btn-primary btn-sm" type="submit">บันทึก</button>
+                <a href="{{ route('admincontent') }}" class="btn btn-danger btn-sm">ยกเลิก</a>
             </form>
         </div>
     </div>
@@ -133,18 +133,18 @@
                         success:function (result) {
                             if (result.value == true) {
                                 $('#alias').addClass('is-invalid');
-                                $('#validatealert').text('Alias is have use to other content.');
+                                $('#validatealert').text('Alias นี้มีบทความอื่นใช้แล้ว');
                                 pass = false;
                             } else {
                                 $('#alias').removeClass('is-invalid');
-                                $('#validatealert').text('Valid Alias is required.');
+                                $('#validatealert').text('Alias ห้ามว่าง');
                                 pass = true;
                             }
                         }
                     });
                 }else{
                     $('#alias').removeClass('is-invalid');
-                    $('#validatealert').text('Valid Alias is required.');
+                    $('#validatealert').text('Alias ห้ามว่าง');
                     pass = true;
                 }
             }
