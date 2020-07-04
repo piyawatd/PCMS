@@ -14,13 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/', function () {
-    return view('welcome');
-});
-//Route::get('', 'WebController@index')->name('home');
-Route::get('product', 'WebController@product')->name('product');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('', 'WebController@index')->name('home');
+Route::get('product/{alias}', 'WebController@product')->name('product');
+
+//Cart
+Route::get('cart', 'WebController@viewCart')->name('viewcart');
+Route::post('cart', 'WebController@addToCart')->name('addcart');
+
+
+
+
 Route::get('filemanager', 'FileManagerController@index')->name('filemanager');
-Route::get('addCart/{id}', 'WebController@addToCart')->name('addToCart');
 
 Route::get('/test', 'FormControlController@index');
 Route::post('file/upload', 'FormControlController@upload')->name('file.upload');
@@ -64,6 +71,21 @@ Route::prefix('admins')->group(function () {
         Route::post('update/{id}', 'Admins\ContentController@update')->name('admincontentupdate');
         Route::delete('delete/{id}', 'Admins\ContentController@delete')->name('admincontentdelete');
         Route::get('checkAlias', 'Admins\ContentController@checkAlias')->name('checkcontentalias');
+    });
+
+//    Product
+    Route::prefix('product')->group(function () {
+        Route::get('', 'Admins\ProductController@index')->name('adminproduct');
+        Route::get('list', 'Admins\ProductController@list')->name('adminproductlist');
+        Route::get('new', 'Admins\ProductController@new')->name('adminproductnew');
+        Route::get('edit/{id}', 'Admins\ProductController@edit')->name('adminproductedit');
+        Route::put('publish/{id}', 'Admins\ProductController@publish')->name('adminproductpublish');
+        Route::get('gallery/{id}', 'Admins\ProductController@gallery')->name('adminproductgallery');
+        Route::post('galleryupdate/{id}', 'Admins\ProductController@galleryupdate')->name('adminproductgalleryupdate');
+        Route::post('save', 'Admins\ProductController@create')->name('adminproductsave');
+        Route::post('update/{id}', 'Admins\ProductController@update')->name('adminproductupdate');
+        Route::delete('delete/{id}', 'Admins\ProductController@delete')->name('adminproductdelete');
+        Route::get('checkAlias', 'Admins\ProductController@checkAlias')->name('checkproductalias');
     });
 
 //User
