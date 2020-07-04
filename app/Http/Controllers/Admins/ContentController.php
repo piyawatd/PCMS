@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\Admins;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\CategoryContent;
 use App\Models\Content;
 use App\Models\ContentGallery;
 use Illuminate\Http\Request;
@@ -30,12 +30,12 @@ class ContentController extends Controller
     public function new(){
         $content = new Content();
         $content->publish_date = now();
-        $category = Category::where('status',true)->get();
+        $category = CategoryContent::where('status',true)->get();
         return view('Admins.content.form',['navsel' => 'content','mode' => 'new','content' => $content,'category'=>$category]);
     }
 
     public function edit($id){
-        $category = Category::where('status',true)->get();
+        $category = CategoryContent::where('status',true)->get();
         return view('Admins.content.form',['navsel' => 'content','mode' => 'edit','content' => Content::find($id),'category'=>$category]);
     }
 
@@ -106,7 +106,7 @@ class ContentController extends Controller
             $content->publish = false;
         }
         $content->publish_date = date_create_from_format('d/m/Y',$request->input('publish_date'));
-        $content->category_content = $request->input('category_content');
+        $content->category = $request->input('category');
         $content->status = True;
         $content->save();
     }
