@@ -13,3 +13,9 @@ body {
 .font-family-normal {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif!important;
 }
+#content {
+    min-height: 800px;
+}
+#viewcart .dropdown-item {
+    padding: 0.25rem 0.5rem;
+}
