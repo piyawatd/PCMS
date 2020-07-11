@@ -13,10 +13,29 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        $tableName = 'addresses';
+        Schema::create($tableName, function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->text('address')
+                ->nullable(false)
+                ->comment('ที่อยู่จัดส่ง');
+            $table->integer('province_id')
+                ->nullable(false)
+                ->comment('รหัสจังหวัด');
+            $table->integer('amphure_id')
+                ->nullable(false)
+                ->comment('รหัสอำเภอ');
+            $table->integer('district_id')
+                ->nullable(false)
+                ->comment('รหัสตำบล');
+            $table->string('zipcode')
+                ->nullable(false)
+                ->comment('รหัสไปรษณีย์');
+            $table->integer('customer_id')
+                ->nullable(false)
+                ->comment('รหัสลูกค้า');
         });
+        DB::statement("ALTER TABLE `$tableName` comment 'ที่อยู่'");
     }
 
     /**
