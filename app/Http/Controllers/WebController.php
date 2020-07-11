@@ -10,9 +10,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Contactus;
+use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Hash;
+use Lang;
+use Session;
 
 class WebController extends Controller
 {
@@ -25,7 +30,7 @@ class WebController extends Controller
 //        $category = Category::all()->first();
 //        echo $category->name;
         App::setLocale('th');
-        echo $category->name;
+//        echo $category->name;
         $product = Product::all()->first();
         return view('web.index',['tvalue'=>$this->testGetVal(),'product'=>$product]);
     }
@@ -44,8 +49,38 @@ class WebController extends Controller
         return view('web.product',['page'=>'product','product'=>Product::where('alias',$alias)->first()]);
     }
 
+    public function contactus(){
+        return view('web.contactus',['page'=>'contactus']);
+    }
+
+    public function contactussave(Request $request){
+        $contact = new Contactus();
+        $contact->fullname = $request->input('fullname');
+        $contact->email = $request->input('email');
+        $contact->phone = $request->input('phone');
+        $contact->detail = $request->input('detail');
+        $contact->save();
+        return redirect()->route('contactus')->with('success', Lang::get('web_alert.contactsuccess'));
+    }
+
+    public function signup(){
+        return view('web.register',['page'=>'register']);
+    }
+
+    public function signupsave(Request $request){
+        $customer = new Customer();
+        $customer->username = $request->input('username');
+        $customer->password = Hash::make($request->input('password'));
+        $customer->firstname = $request->input('firstname');
+        $customer->lastname = $request->input('lastname');
+        $customer->email = $request->input('email');
+        $customer->phone = $request->input('phone');
+        $customer->save();
+        return redirect()->route('signup')->with('success', Lang::get('web_alert.signupsuccess'));
+    }
+
     public function changeLanguage(Request $request){
-        App::setLocale($request->input('lang'));
+        App::setLocale($request->input('language'));
         $result['result'] = true;
         return $result;
     }
