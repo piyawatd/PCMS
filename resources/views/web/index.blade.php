@@ -1,5 +1,18 @@
-@lang('web.hello',['name'=>'ปิยวัฒน์'])
-{{ $tvalue }}
+@extends('layouts.template')
+@section('title')
 
+@endsection
+@section('meta')
 
-<p><img alt="" src="../../public/filemanager/images/qr.png" style="width: 50px; height: 76px;" /></p>
+@endsection
+@section('stylesheet')
+
+@endsection
+@section('content')
+
+@endsection
+@section('scripts')
+    <script type="text/javascript">
+
+    </script>
+@endsection
