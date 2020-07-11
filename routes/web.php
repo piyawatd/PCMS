@@ -19,11 +19,21 @@ Auth::routes();
 //});
 Route::get('', 'WebController@index')->name('home');
 Route::get('product/{alias}', 'WebController@product')->name('product');
-
+//Contact Us
+Route::get('contactus', 'WebController@contactus')->name('contactus');
+Route::post('contactussave', 'WebController@contactussave')->name('contactussave');
 //Cart
 Route::get('cart', 'WebController@viewCart')->name('viewcart');
 Route::post('cart', 'WebController@addToCart')->name('addcart');
-
+//Customer
+Route::get('signup', 'WebController@signup')->name('signup');
+Route::post('signupsave', 'WebController@signupsave')->name('signupsave');
+//Language
+Route::get('/lang/{key}', function ($key) {
+    echo $key;
+    session()->put('locale', $key);
+    return redirect()->back();
+});
 
 
 
