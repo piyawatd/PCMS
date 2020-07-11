@@ -23,6 +23,19 @@
             <!-- Topbar -->
         @include('layouts.inc-navbar')
         <!-- End of Topbar -->
+            <!-- Message -->
+                @if ($message = Session::get('success'))
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 align-self-center">
+                                <div class="alert alert-success" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            <!-- End of Message -->
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 @yield('content')
@@ -36,6 +49,16 @@
 <script type="text/javascript">
     loadCart();
     activeCart();
+
+    function changeLanguage(language) {
+        $.ajax({
+            url:'/lang/'+language,
+            method:"GET",
+            success:function(result){
+                location.reload()
+            }
+        })
+    }
 
     function activeCart() {
         $('#cartDropdown').hover(function () {
