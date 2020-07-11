@@ -8,7 +8,6 @@
 @section('stylesheet')
     <link href="{{asset('/css/form-validation.css')}}" rel="stylesheet">
     <link href="{{asset('/css/gijgo.css')}}" rel="stylesheet">
- type="text/css" />
 @endsection
 @section('content')
     <?php
