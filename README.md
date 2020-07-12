@@ -41,6 +41,9 @@ Multi language cms use laravel framework.
     1. สร้าง folder ใน folder migrations
     2. Copyไฟล์ migration ไปไว้ใน folder ที่สร้างใหม่
     3. php artisan migrate --path=/database/migrations/<folder>
+    
+    สั่ง migrate ถ้ามี table อยู่แล้ว
+    php artisan migrate:refresh --path=
 
 ## Module
 
@@ -54,3 +57,7 @@ Multi language cms use laravel framework.
 8. Coupon
 9. Asset Management
 10. SEO
+
+## Thailand Data
+
+filename `thailand-data.sql` is data amphure district and province in thailand
