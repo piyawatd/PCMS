@@ -35,6 +35,17 @@
                         </div>
                     </div>
                 @endif
+            @if ($message = Session::get('error'))
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 align-self-center">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <!-- End of Message -->
             <!-- Begin Page Content -->
             <div class="container-fluid">
