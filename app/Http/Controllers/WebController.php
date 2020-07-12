@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Contactus;
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -41,16 +43,16 @@ class WebController extends Controller
     }
 
     public function category(Request $request){
-        return view('web.category',['page'=>'category','alias'=>$request->input('alias')]);
+        return view('web.category',['alias'=>$request->input('alias')]);
     }
 
     public function product($alias,Request $request){
         $request->session()->flush();
-        return view('web.product',['page'=>'product','product'=>Product::where('alias',$alias)->first()]);
+        return view('web.product',['product'=>Product::where('alias',$alias)->first()]);
     }
 
     public function contactus(){
-        return view('web.contactus',['page'=>'contactus']);
+        return view('web.contactus');
     }
 
     public function contactussave(Request $request){
@@ -61,6 +63,37 @@ class WebController extends Controller
         $contact->detail = $request->input('detail');
         $contact->save();
         return redirect()->route('contactus')->with('success', Lang::get('web_alert.contactsuccess'));
+    }
+
+    public function checkout(){
+        $carts = $this->viewCart();
+        return view('web.checkout',['carts'=>$carts]);
+    }
+
+    public function checkoutsave(){
+        $order = new Order();
+        $order->order_no = 'NO01';
+        $order->customer = 1;
+        $order->note = 'note';
+        $order->total = 10000;
+        $order->grand_total = 10000;
+        $order->save();
+        if(session()->has('cart')){
+            $cart = session()->get('cart');
+            foreach($cart as $key=>$value) {
+                $orderItem = new OrderItem();
+                $orderItem->order = $order->id;
+                $orderItem->title_th = $cart[$key]['title_th'];
+                $orderItem->title_en = $cart[$key]['title_en'];
+                $orderItem->quantity = $cart[$key]['quantity'];
+                $orderItem->price = $cart[$key]['price'];
+                $orderItem->totalline = $cart[$key]['quantity'] * $cart[$key]['price'];
+                $orderItem->save();
+            }
+            //Remove Cart Item
+            Session::forget('cart');
+        }
+        return redirect()->route('home')->with('success', Lang::get('web_alert.checkoutsuccess'));
     }
 
     public function signup(){
@@ -104,8 +137,9 @@ class WebController extends Controller
                 $item['quantity'] = $cart[$key]['quantity'];
                 $item['price'] = $cart[$key]['price'];
                 $item['thumbnail'] = $cart[$key]['thumbnail'];
-                $item['total'] = $cart[$key]['quantity'] * $cart[$key]['price'];
-                $total += $cart[$key]['quantity'] * $cart[$key]['price'];
+                $linetotal = $cart[$key]['quantity'] * $cart[$key]['price'];
+                $item['total'] = $linetotal;
+                $total += $linetotal;
                 array_push($cartArray,$item);
             }
         }

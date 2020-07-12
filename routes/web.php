@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/desktop', function () {
+    return view('web.sampledesktop');
+});
+Route::get('/mobile', function () {
+    return view('web.samplemobile');
+});
 Route::get('', 'WebController@index')->name('home');
 Route::get('product/{alias}', 'WebController@product')->name('product');
 //Contact Us
@@ -25,6 +28,9 @@ Route::post('contactussave', 'WebController@contactussave')->name('contactussave
 //Cart
 Route::get('cart', 'WebController@viewCart')->name('viewcart');
 Route::post('cart', 'WebController@addToCart')->name('addcart');
+//Check Out
+Route::get('checkout', 'WebController@checkout')->name('checkout');
+Route::post('checkoutsave', 'WebController@checkoutsave')->name('checkoutsave');
 //Customer
 Route::get('signup', 'WebController@signup')->name('signup');
 Route::post('signupsave', 'WebController@signupsave')->name('signupsave');
@@ -33,6 +39,10 @@ Route::get('/lang/{key}', function ($key) {
     echo $key;
     session()->put('locale', $key);
     return redirect()->back();
+});
+
+Route::prefix('member')->group(function () {
+    Route::get('', 'Member\MemberController@index')->name('memberindex');
 });
 
 
@@ -56,7 +66,6 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\CategoryController@delete')->name('admincategorydelete');
         Route::get('checkAlias', 'Admins\CategoryController@checkAlias')->name('checkcategoryalias');
     });
-
 //    CategoryContent
     Route::prefix('categorycontent')->group(function () {
         Route::get('', 'Admins\CategoryContentController@index')->name('admincategorycontent');
@@ -82,7 +91,6 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\ContentController@delete')->name('admincontentdelete');
         Route::get('checkAlias', 'Admins\ContentController@checkAlias')->name('checkcontentalias');
     });
-
 //    Product
     Route::prefix('product')->group(function () {
         Route::get('', 'Admins\ProductController@index')->name('adminproduct');
@@ -97,8 +105,7 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\ProductController@delete')->name('adminproductdelete');
         Route::get('checkAlias', 'Admins\ProductController@checkAlias')->name('checkproductalias');
     });
-
-//User
+//    User
     Route::prefix('user')->group(function () {
         Route::get('', 'Admins\UserController@index')->name('userindex');
         Route::get('new', 'Admins\UserController@new')->name('usernew');
@@ -111,8 +118,7 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\UserController@delete')->name('userdelete');
         Route::get('checkUsername', 'Admins\UserController@checkUsername')->name('usercheckUsername');
     });
-
-
+//    File
     Route::prefix('file')->group(function() {
         Route::get('filemanager', 'Admins\FileManagerController@manager')->name('filemanager');
         Route::get('elbrowse', 'Admins\FileManagerController@elbrowse')->name('elbrowse');
@@ -127,5 +133,3 @@ Route::prefix('admins')->group(function () {
 });
 
 Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
