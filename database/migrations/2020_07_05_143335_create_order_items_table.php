@@ -17,22 +17,26 @@ class CreateOrderItemsTable extends Migration
         Schema::create($tableName, function (Blueprint $table) {
             $table->id();
             $table->string('title_th')
+                ->nullable(false)
                 ->comment('title ภาษาไทย');
             $table->string('title_en')
                 ->nullable(true)
                 ->comment('title ภาษาอังกฤษ');
             $table->integer('quantity')
                 ->nullable(false)
-                ->nullable(1)
+                ->default(1)
                 ->comment('จำนวน');
             $table->double('price')
                 ->nullable(true)
-                ->nullable(0)
+                ->default(0)
                 ->comment('ราคา');
             $table->double('totalline')
                 ->nullable(true)
-                ->nullable(0)
+                ->default(0)
                 ->comment('ราคารวม');
+            $table->integer('order')
+                ->nullable(false)
+                ->comment('order');
             $table->boolean('status')
                 ->nullable(true)
                 ->default(true)

@@ -31,7 +31,7 @@ class CreateOrderAddressesTable extends Migration
             $table->string('zipcode')
                 ->nullable(false)
                 ->comment('รหัสไปรษณีย์');
-            $table->integer('order_id')
+            $table->integer('order')
                 ->nullable(false)
                 ->comment('รหัส order');
         });
