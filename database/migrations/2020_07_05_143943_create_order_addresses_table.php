@@ -18,24 +18,27 @@ class CreateOrderAddressesTable extends Migration
             $table->id();
             $table->text('address')
                 ->nullable(false)
-                ->comment('ที่อยู่จัดส่ง');
-            $table->integer('province_id')
+                ->comment('ที่อยู่');
+            $table->string('province')
                 ->nullable(false)
                 ->comment('รหัสจังหวัด');
-            $table->integer('amphure_id')
+            $table->string('amphure')
                 ->nullable(false)
                 ->comment('รหัสอำเภอ');
-            $table->integer('district_id')
+            $table->string('district')
                 ->nullable(false)
                 ->comment('รหัสตำบล');
             $table->string('zipcode')
                 ->nullable(false)
                 ->comment('รหัสไปรษณีย์');
+            $table->string('type')
+                ->nullable(false)
+                ->comment('ประเภทที่อยู่');
             $table->integer('order')
                 ->nullable(false)
                 ->comment('รหัส order');
         });
-        DB::statement("ALTER TABLE `$tableName` comment 'ที่จัดส่ง'");
+        DB::statement("ALTER TABLE `$tableName` comment 'ที่อยู่สั่งสินค้า'");
     }
 
     /**

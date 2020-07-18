@@ -42,7 +42,7 @@ class CreateOrdersTable extends Migration
             $table->double('grand_total')
                 ->nullable(true)
                 ->default(0)
-                ->comment('จำนวนเงินหลังหลักคูปอง');
+                ->comment('จำนวนเงินหลังหักคูปอง');
             $table->boolean('status')
                 ->nullable(true)
                 ->default(true)
