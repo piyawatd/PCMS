@@ -105,6 +105,17 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\ProductController@delete')->name('adminproductdelete');
         Route::get('checkAlias', 'Admins\ProductController@checkAlias')->name('checkproductalias');
     });
+//    Order
+    Route::prefix('order')->group(function () {
+        Route::get('', 'Admins\OrderController@index')->name('adminorder');
+        Route::get('list', 'Admins\OrderController@list')->name('adminorderlist');
+        Route::get('new', 'Admins\OrderController@new')->name('adminordernew');
+        Route::get('edit/{id}', 'Admins\OrderController@edit')->name('adminorderedit');
+        Route::post('save', 'Admins\OrderController@create')->name('adminordersave');
+        Route::post('update/{id}', 'Admins\OrderController@update')->name('adminorderupdate');
+        Route::delete('delete/{id}', 'Admins\OrderController@delete')->name('adminorderdelete');
+    });
+
 //    User
     Route::prefix('user')->group(function () {
         Route::get('', 'Admins\UserController@index')->name('userindex');

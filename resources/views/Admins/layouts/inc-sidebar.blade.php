@@ -29,14 +29,15 @@
             <i class="fab fa-product-hunt"></i>
             <span>สินค้า</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item @if ($navsel===
+                'order') active @endif">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOrder" aria-expanded="true" aria-controls="collapseOrder">
             <i class="fas fa-fw fa-cog"></i>
             <span>Order</span>
         </a>
         <div id="collapseOrder" class="collapse" aria-labelledby="headingOrder" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="buttons.html">Order</a>
+                <a class="collapse-item" href="{{route('adminorder')}}">Order</a>
                 <a class="collapse-item" href="cards.html">Slip</a>
             </div>
         </div>
