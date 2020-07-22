@@ -61,3 +61,18 @@ Multi language cms use laravel framework.
 ## Thailand Data
 
 filename `thailand-data.sql` is data amphure district and province in thailand
+
+## Custom Helper
+
+[Reference](https://laravel-news.com/creating-helpers)
+- Create file in app/ ex. `app/helpers.php`
+- Add files array in composer.json session autoload
+
+
+    "autoload": {
+        "files":[
+            "app/helpers.php"
+        ]
+    }
+    
+ - dump autoloader: `composer dump-autoload` 
