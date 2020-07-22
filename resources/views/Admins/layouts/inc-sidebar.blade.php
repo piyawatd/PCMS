@@ -42,8 +42,9 @@
             </div>
         </div>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('adminindex') }}">
+    <li class="nav-item @if ($navsel===
+                'admincustomer') active @endif">
+        <a class="nav-link" href="{{ route('admincustomer') }}">
             <i class="fas fa-user fa-tachometer-alt"></i>
             <span>Customer</span></a>
     </li>

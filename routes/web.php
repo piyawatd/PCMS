@@ -105,6 +105,17 @@ Route::prefix('admins')->group(function () {
         Route::delete('delete/{id}', 'Admins\ProductController@delete')->name('adminproductdelete');
         Route::get('checkAlias', 'Admins\ProductController@checkAlias')->name('checkproductalias');
     });
+//    Customer
+    Route::prefix('customer')->group(function () {
+        Route::get('', 'Admins\CustomerController@index')->name('admincustomer');
+        Route::get('list', 'Admins\CustomerController@list')->name('admincustomerlist');
+        Route::get('new', 'Admins\CustomerController@new')->name('admincustomernew');
+        Route::get('edit/{id}', 'Admins\CustomerController@edit')->name('admincustomeredit');
+        Route::post('save', 'Admins\CustomerController@create')->name('admincustomersave');
+        Route::post('update/{id}', 'Admins\CustomerController@update')->name('admincustomerupdate');
+        Route::delete('delete/{id}', 'Admins\CustomerController@delete')->name('admincustomerdelete');
+        Route::get('checkEmail', 'Admins\CustomerController@checkEmail')->name('checkcustomerEmail');
+    });
 //    Order
     Route::prefix('order')->group(function () {
         Route::get('', 'Admins\OrderController@index')->name('adminorder');

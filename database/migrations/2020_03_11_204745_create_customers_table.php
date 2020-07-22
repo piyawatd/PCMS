@@ -16,9 +16,6 @@ class CreateCustomersTable extends Migration
         $tableName = 'customers';
         Schema::create($tableName, function (Blueprint $table) {
             $table->id();
-            $table->string('username')
-                ->nullable(false)
-                ->comment('username');
             $table->string('password')
                 ->nullable(false)
                 ->comment('password');
@@ -34,6 +31,9 @@ class CreateCustomersTable extends Migration
             $table->string('phone')
                 ->nullable(true)
                 ->comment('เบอร์โทรศัพท์');
+            $table->string('local')
+                ->nullable(true)
+                ->comment('language');
             $table->boolean('status')
                 ->nullable(true)
                 ->default(true)
