@@ -96,13 +96,13 @@
                 }
             });
             $('#shipprovince').change(function () {
-                getAmphure($('#shipprovince').val(),'{{$selfield}}').then((data)=>renderAmphure(data,'shipamphure','{{$selfield}}'));
+                renderAmphure(getAmphure($('#shipprovince').val(),'{{$selfield}}'),'shipamphure','{{$selfield}}');
             })
             $('#shipamphure').change(function () {
                 changeShipAmphure();
             })
             $('#billprovince').change(function () {
-                getAmphure($('#billprovince').val(),'{{$selfield}}').then((data)=>renderAmphure(data,'billamphure','{{$selfield}}'));
+                renderAmphure(getAmphure($('#billprovince').val(),'{{$selfield}}'),'billamphure','{{$selfield}}');
             })
             $('#billamphure').change(function () {
                 changeBillAmphure();
@@ -132,11 +132,11 @@
         }
 
         function changeShipAmphure() {
-            getDistrict($('#shipamphure').val(),'{{$selfield}}').then((data)=>renderDistrict(data,'shipdistrict','{{$selfield}}'));
+            renderDistrict(getDistrict($('#shipamphure').val(),'{{$selfield}}'),'shipdistrict','{{$selfield}}');
         }
 
         function changeBillAmphure() {
-            getDistrict($('#billamphure').val(),'{{$selfield}}').then((data)=>renderDistrict(data,'billdistrict','{{$selfield}}'));
+            renderDistrict(getDistrict($('#billamphure').val(),'{{$selfield}}'),'billdistrict','{{$selfield}}');
         }
 
         function renderDistrict(result,element,local) {

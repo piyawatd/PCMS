@@ -1,31 +1,21 @@
-async function getAmphure(id,local) {
-    let result;
-    try{
-        result = await $.ajax({
-            url:'/api/amphure',
-            method:"GET",
-            data : {"id":id,"local":local},
-            contentType : "JSON"
-        })
-        return result;
-    } catch (error) {
-        console.log(error)
-    }
-
+function getAmphure(id,local) {
+    result = $.ajax({
+        url:'/api/amphure',
+        method:"GET",
+        data : {"id":id,"local":local},
+        async : false,
+        contentType : "JSON"
+    })
+    return result.responseJSON;
 }
 
-async function getDistrict(id,local) {
-    let result;
-    try{
-        result = await $.ajax({
-            url:'/api/district',
-            method:"GET",
-            data : {"id":id,"local":local},
-            contentType : "JSON"
-        })
-        return result;
-    } catch (error) {
-        console.log(error)
-    }
-
+function getDistrict(id,local) {
+    result = $.ajax({
+        url:'/api/district',
+        method:"GET",
+        data : {"id":id,"local":local},
+        async : false,
+        contentType : "JSON"
+    })
+    return result.responseJSON;
 }
