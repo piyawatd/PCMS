@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('product/{alias}', 'WebController@product')->name('productbyalias');
+Route::get('amphure', 'ServiceController@getAmphure')->name('getamphure');
+Route::get('district', 'ServiceController@getDistrict')->name('getdistrict');
