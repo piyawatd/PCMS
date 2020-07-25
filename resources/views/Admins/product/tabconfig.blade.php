@@ -12,7 +12,7 @@
     <label for="sku" class="col-md-2 col-form-label">SKU</label>
     <div class="col-md-10">
         <input type="text" class="form-control" id="sku" name="sku" placeholder="SKU" value="{{$product->sku}}">
-        <div class="invalid-feedback" id="validatealert">
+        <div class="invalid-feedback">
             SKU ห้ามว่าง
         </div>
     </div>
@@ -21,7 +21,7 @@
     <label for="price" class="col-md-2 col-form-label">ราคา</label>
     <div class="col-md-10">
         <input type="number" class="form-control" id="price" name="price" placeholder="0" value="{{$product->price}}" required>
-        <div class="invalid-feedback" id="validatealert">
+        <div class="invalid-feedback">
             ราคาห้ามว่าง
         </div>
     </div>
