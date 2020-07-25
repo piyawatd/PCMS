@@ -34,6 +34,7 @@
         <div class="col-md-11">
             <form class="needs-validation" id="formdata" novalidate method="post" action="{{$linkurl}}">
                 @csrf
+                <input type="hidden" id="local" value="{{$selfield}}">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" id="detail-tab" data-toggle="tab" href="#tab-detail" role="tab" aria-controls="tab-detail" aria-selected="true">ข้อมูลทั่วไป</a>
@@ -48,11 +49,11 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <!-- TAB Detail -->
-                    <div class="tab-pane active" id="tab-detail" role="tabpanel" aria-labelledby="tab-detail">
+                    <div class="tab-pane " id="tab-detail" role="tabpanel" aria-labelledby="tab-detail">
                         @include('Admins.customer.tabdetail')
                     </div>
                     <!-- TAB Shipping -->
-                    <div class="tab-pane" id="tab-shipping" role="tabpanel" aria-labelledby="tab-shipping">
+                    <div class="tab-pane active" id="tab-shipping" role="tabpanel" aria-labelledby="tab-shipping">
                         @include('Admins.customer.tabshipping')
                     </div>
                     <!-- TAB Billing -->
@@ -72,6 +73,7 @@
     <script src="{{asset('/js/ckeditor.js')}}"></script>
     <script src="{{asset('/js/dataservice.js')}}"></script>
     <script src="{{asset('/js/gijgo.js')}}"></script>
+    <script src="{{asset('/js/address.js')}}"></script>
     <script type="text/javascript">
 
         @if($mode == 'new')
@@ -93,10 +95,35 @@
                     }
                 }
             });
+            $('#shipprovince').change(function () {
+                getAmphure($('#shipprovince').val()).then((data)=>renderAmphure(data,'shipamphure','{{$selfield}}'));
+            })
+            $('#shipamphure').change(function () {
+                changeAmphure();
+            })
             $('#formdata').submit(function( event ) {
                 return pass;
             });
         })
+
+        function renderAmphure(result,element,local) {
+            $('#'+element).html("");
+            $.each(result,function (key, value) {
+                $('#'+element).append('<option value="'+value.id+'">'+value[local]+'</option>')
+            })
+            changeAmphure();
+        }
+
+        function changeAmphure() {
+            getDistrict($('#shipamphure').val()).then((data)=>renderDistrict(data,'shipdistrict','{{$selfield}}'));
+        }
+
+        function renderDistrict(result,element,local) {
+            $('#'+element).html("");
+            $.each(result,function (key, value) {
+                $('#'+element).append('<option value="'+value.id+'">'+value[local]+'</option>')
+            })
+        }
 
         function checkemail() {
             var email = $.trim($('#email').val());

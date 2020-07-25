@@ -10,7 +10,7 @@
         <select class="form-control" id="shipprovince" name="shipprovince">
             <option value="" @if($shipping->province == "")selected="selected"@endif>กรุณาเลือกจังหวัด</option>
             @foreach ($shipprovince as $item)
-                <option value="{{ $item[$selfield] }}" @if($item[$selfield] == $shipping->province)selected="selected"@endif>{{ $item[$selfield] }}</option>
+                <option value="{{ $item->id }}" @if($item[$selfield] == $shipping->province)selected="selected"@endif>{{ $item[$selfield] }}</option>
             @endforeach
         </select>
     </div>
