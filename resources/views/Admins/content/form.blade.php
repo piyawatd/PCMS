@@ -126,7 +126,6 @@
                         method: "GET",
                         cache: false,
                         data: {
-                            "_token": $('meta[name="csrf-token"]').attr('content'),
                             "value": alias
                         },
                         success:function (result) {
