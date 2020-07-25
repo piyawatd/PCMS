@@ -53,9 +53,11 @@
                     <div class="tab-pane" id="tab-en" role="tabpanel" aria-labelledby="tab-en">
                         @include('Admins.product.taben')
                     </div>
+                    <!-- TAB Config -->
                     <div class="tab-pane active" id="tab-config" role="tabpanel" aria-labelledby="tab-config">
                         @include('Admins.product.tabconfig')
                     </div>
+                    <!-- TAB SEO -->
                     <div class="tab-pane" id="tab-seo" role="tabpanel" aria-labelledby="tab-seo">
                         @include('Admins.product.tabseo')
                     </div>
@@ -127,7 +129,6 @@
                         method: "GET",
                         cache: false,
                         data: {
-                            "_token": $('meta[name="csrf-token"]').attr('content'),
                             "value": alias
                         },
                         success:function (result) {
