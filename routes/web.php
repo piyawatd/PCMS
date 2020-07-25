@@ -114,7 +114,7 @@ Route::prefix('admins')->group(function () {
         Route::post('save', 'Admins\CustomerController@create')->name('admincustomersave');
         Route::post('update/{id}', 'Admins\CustomerController@update')->name('admincustomerupdate');
         Route::delete('delete/{id}', 'Admins\CustomerController@delete')->name('admincustomerdelete');
-        Route::get('checkEmail', 'Admins\CustomerController@checkEmail')->name('checkcustomerEmail');
+        Route::get('checkEmail', 'Admins\CustomerController@checkEmail')->name('checkcustomeremail');
     });
 //    Order
     Route::prefix('order')->group(function () {
