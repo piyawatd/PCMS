@@ -86,7 +86,6 @@
                             type: "DELETE",
                             url: "{{ url('admins/customer/delete') }}/"+id,
                             dataType:"json",
-                            data:{ _token: "{{csrf_token()}}" },
                             success: function(response){
                                 if(response.result == true)
                                 {

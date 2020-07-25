@@ -30,12 +30,12 @@ class CustomerController extends Controller
         $customer->local = 'th';
         //shipping
         $shipping = new Addresses();
-        $shippingprovince = Province::all();
+        $shippingprovince = Province::orderBy('name_th')->get();
         $shippingamphure = [];
         $shippingdistrict = [];
         //billing
         $billing = new Addresses();
-        $billingprovince = Province::all();
+        $billingprovince = Province::orderBy('name_th')->get();
         $billingamphure = [];
         $billingdistrict = [];
         return view('Admins.customer.form',['navsel' => 'customer','mode' => 'new','customer' => $customer,'shipping'=>$shipping,'billing'=>$billing,'shipprovince'=>$shippingprovince,'shipamphure'=>$shippingamphure,'shipdistrict'=>$shippingdistrict,'billprovince'=>$billingprovince,'billamphure'=>$billingamphure,'billdistrict'=>$billingdistrict]);
@@ -97,7 +97,6 @@ class CustomerController extends Controller
         $shipping = New Addresses();
         $this->updateDatabase($customer,$billing,$shipping,$request);
         return redirect()->route('admincustomer')->with('success', 'customer saved!');
-
     }
 
     public function update($id,Request $request){
@@ -112,7 +111,7 @@ class CustomerController extends Controller
         return redirect()->route('admincustomer')->with('success', 'customer updated!');
     }
 
-    public function updateDatabase(CustomerController $customer, Addresses $billing, Addresses $shipping, Request $request){
+    public function updateDatabase(Customer $customer, Addresses $billing, Addresses $shipping, Request $request){
         $request->validate([
             'email'=>'required'
         ]);
@@ -124,37 +123,40 @@ class CustomerController extends Controller
         $customer->firstname = $request->input('firstname');
         $customer->lastname = $request->input('lastname');
         $customer->phone = $request->input('phone');
+        $customer->local = $request->input('local');
         $customer->status = True;
         $customer->save();
         //shipping
-        $shipping->address = $request->input('shipping_address');
-        $shipping->province = $request->input('shipping_province');
-        $shipping->amphure = $request->input('shipping_amphure');
-        $shipping->district = $request->input('shipping_district');
-        $shipping->zipcode = $request->input('shipping_zipcode');
-        $shipping->type = 'shipping';
-        $shipping->customer = $customer->id;
-        $shipping->save();
+        if(!empty($request->input('shipaddress')) && !empty($request->input('sprovince')))
+        {
+            $shipping->address = $request->input('shipaddress');
+            $shipping->province = $request->input('sprovince');
+            $shipping->amphure = $request->input('samphure');
+            $shipping->district = $request->input('sdistrict');
+            $shipping->zipcode = $request->input('shipzipcode');
+            $shipping->type = 'shipping';
+            $shipping->customer = $customer->id;
+            $shipping->save();
+        }
         //billing
-        $billing->address = $request->input('billing_address');
-        $billing->province = $request->input('billing_province');
-        $billing->amphure = $request->input('billing_amphure');
-        $billing->district = $request->input('billing_district');
-        $billing->zipcode = $request->input('billing_zipcode');
-        $billing->type = 'billing';
-        $billing->customer = $customer->id;
-        $shipping->save();
+        if(!empty($request->input('billaddress')) && !empty($request->input('bprovince'))) {
+            $billing->address = $request->input('billaddress');
+            $billing->province = $request->input('bprovince');
+            $billing->amphure = $request->input('bamphure');
+            $billing->district = $request->input('bdistrict');
+            $billing->zipcode = $request->input('billzipcode');
+            $billing->type = 'billing';
+            $billing->customer = $customer->id;
+            $billing->save();
+        }
     }
 
     public function delete($id){
         $result['result'] = false;
         $customer = Customer::find($id);
-//        $countContent = Content::where('customer','=',$id)->count();
-//        if ($countContent == 0){
         $customer->status = False;
         $customer->save();
         $result['result'] = true;
-//        }
         return $result;
     }
 

@@ -1,10 +1,10 @@
-async function getAmphure(id) {
+async function getAmphure(id,local) {
     let result;
     try{
         result = await $.ajax({
             url:'/api/amphure',
             method:"GET",
-            data : {"id":id},
+            data : {"id":id,"local":local},
             contentType : "JSON"
         })
         return result;
@@ -14,13 +14,13 @@ async function getAmphure(id) {
 
 }
 
-async function getDistrict(id) {
+async function getDistrict(id,local) {
     let result;
     try{
         result = await $.ajax({
             url:'/api/district',
             method:"GET",
-            data : {"id":id},
+            data : {"id":id,"local":local},
             contentType : "JSON"
         })
         return result;

@@ -34,7 +34,7 @@
         <div class="col-md-11">
             <form class="needs-validation" id="formdata" novalidate method="post" action="{{$linkurl}}">
                 @csrf
-                <input type="hidden" id="local" value="{{$selfield}}">
+                <input type="hidden" id="local" name="local" value="{{$selfield}}">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" id="detail-tab" data-toggle="tab" href="#tab-detail" role="tab" aria-controls="tab-detail" aria-selected="true">ข้อมูลทั่วไป</a>
@@ -49,11 +49,11 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <!-- TAB Detail -->
-                    <div class="tab-pane " id="tab-detail" role="tabpanel" aria-labelledby="tab-detail">
+                    <div class="tab-pane active" id="tab-detail" role="tabpanel" aria-labelledby="tab-detail">
                         @include('Admins.customer.tabdetail')
                     </div>
                     <!-- TAB Shipping -->
-                    <div class="tab-pane active" id="tab-shipping" role="tabpanel" aria-labelledby="tab-shipping">
+                    <div class="tab-pane" id="tab-shipping" role="tabpanel" aria-labelledby="tab-shipping">
                         @include('Admins.customer.tabshipping')
                     </div>
                     <!-- TAB Billing -->
@@ -96,12 +96,24 @@
                 }
             });
             $('#shipprovince').change(function () {
-                getAmphure($('#shipprovince').val()).then((data)=>renderAmphure(data,'shipamphure','{{$selfield}}'));
+                getAmphure($('#shipprovince').val(),'{{$selfield}}').then((data)=>renderAmphure(data,'shipamphure','{{$selfield}}'));
             })
             $('#shipamphure').change(function () {
-                changeAmphure();
+                changeShipAmphure();
+            })
+            $('#billprovince').change(function () {
+                getAmphure($('#billprovince').val(),'{{$selfield}}').then((data)=>renderAmphure(data,'billamphure','{{$selfield}}'));
+            })
+            $('#billamphure').change(function () {
+                changeBillAmphure();
             })
             $('#formdata').submit(function( event ) {
+                $('#sprovince').val($('#shipprovince option:selected').text());
+                $('#samphure').val($('#shipamphure option:selected').text());
+                $('#sdistrict').val($('#shipdistrict option:selected').text());
+                $('#bprovince').val($('#billprovince option:selected').text());
+                $('#bamphure').val($('#billamphure option:selected').text());
+                $('#bdistrict').val($('#billdistrict option:selected').text());
                 return pass;
             });
         })
@@ -111,11 +123,20 @@
             $.each(result,function (key, value) {
                 $('#'+element).append('<option value="'+value.id+'">'+value[local]+'</option>')
             })
-            changeAmphure();
+            if(element == 'shipamphure')
+            {
+                changeShipAmphure();
+            }else{
+                changeBillAmphure();
+            }
         }
 
-        function changeAmphure() {
-            getDistrict($('#shipamphure').val()).then((data)=>renderDistrict(data,'shipdistrict','{{$selfield}}'));
+        function changeShipAmphure() {
+            getDistrict($('#shipamphure').val(),'{{$selfield}}').then((data)=>renderDistrict(data,'shipdistrict','{{$selfield}}'));
+        }
+
+        function changeBillAmphure() {
+            getDistrict($('#billamphure').val(),'{{$selfield}}').then((data)=>renderDistrict(data,'billdistrict','{{$selfield}}'));
         }
 
         function renderDistrict(result,element,local) {

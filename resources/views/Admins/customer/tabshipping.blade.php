@@ -1,7 +1,7 @@
 <div class="form-group row">
-    <label for="address" class="col-md-2 col-form-label">ที่อยู่</label>
+    <label for="shipaddress" class="col-md-2 col-form-label">ที่อยู่</label>
     <div class="col-md-10">
-        <input type="text" class="form-control" id="address" name="address" placeholder="ที่อยู่" value="{{$shipping->address}}">
+        <input type="text" class="form-control" id="shipaddress" name="shipaddress" placeholder="ที่อยู่" value="{{$shipping->address}}">
     </div>
 </div>
 <div class="form-group row">
@@ -41,3 +41,6 @@
         <input type="text" class="form-control" id="shipzipcode" name="shipzipcode" placeholder="รหัสไปรษณีย์" value="{{$shipping->zipcode}}">
     </div>
 </div>
+<input type="hidden" id="sprovince" name="sprovince" value="{{$shipping->province}}">
+<input type="hidden" id="samphure" name="samphure" value="{{$shipping->amphure}}">
+<input type="hidden" id="sdistrict" name="sdistrict" value="{{$shipping->district}}">

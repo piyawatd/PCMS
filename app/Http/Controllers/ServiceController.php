@@ -16,10 +16,14 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     public function getAmphure(Request $request){
-        return Amphure::where('province_id',$request->input('id'))->get();
+        return Amphure::where('province_id',$request->input('id'))
+            ->orderBy($request->input('local'))
+            ->get();
     }
 
     public function getDistrict(Request $request){
-        return District::where('amphure_id',$request->input('id'))->get();
+        return District::where('amphure_id',$request->input('id'))
+            ->orderBy($request->input('local'))
+            ->get();
     }
 }
