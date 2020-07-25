@@ -3,9 +3,11 @@ use App\Models\Amphure;
 use App\Models\District;
 
 if (! function_exists('getAmphureByProvinceId')) {
-    function getAmphureByProvinceId($id)
+    function getAmphureByProvinceId($id,$local)
     {
-        return Amphure::where('province_id',$id)->get();
+        return Amphure::where('province_id',$id)
+            ->orderBy($local)
+            ->get();
     }
 }
 if (! function_exists('getAmphureByProvinceName')) {
@@ -15,7 +17,9 @@ if (! function_exists('getAmphureByProvinceName')) {
         foreach($provinces as $province )
         {
             if($province[$field] == $name){
-                $amphure = Amphure::where('province_id',$province->id)->get();
+                $amphure = Amphure::where('province_id',$province->id)
+                    ->orderBy($field)
+                    ->get();
                 break;
             }
         }
@@ -23,9 +27,11 @@ if (! function_exists('getAmphureByProvinceName')) {
     }
 }
 if (! function_exists('getDistrictByAmphureId')) {
-    function getDistrictByAmphureId($id)
+    function getDistrictByAmphureId($id,$local)
     {
-        return District::where('amphure_id',$id)->get();
+        return District::where('amphure_id',$id)
+            ->orderBy($local)
+            ->get();
     }
 }
 if (! function_exists('getDistrictByAmphureName')) {
@@ -35,7 +41,9 @@ if (! function_exists('getDistrictByAmphureName')) {
         foreach($amphures as $amphure )
         {
             if($amphure[$field] == $name){
-                $district = District::where('amphure_id',$amphure->id)->get();
+                $district = District::where('amphure_id',$amphure->id)
+                    ->orderBy($field)
+                    ->get();
                 break;
             }
         }

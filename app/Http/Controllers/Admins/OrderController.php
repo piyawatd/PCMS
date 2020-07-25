@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -32,10 +33,25 @@ class OrderController extends Controller
     public function edit($id){
         $order = Order::find($id);
         $orderItems = $order->Items;
-        $billing = $order->Billing;
-        $shipping = $order->Shipping;
         $customer = $order->CustomerData;
-        return view('Admins.order.form',['navsel' => 'order','mode' => 'edit','order' => $order,'orderItems'=>$orderItems,'$billing'=>$$billing,'$shipping'=>$shipping,'customer'=>$customer]);
+        $lang = $customer->local;
+        $selfield = '';
+        if($lang == 'th'){
+            $selfield = 'name_th';
+        }else{
+            $selfield = 'name_en';
+        }
+        //Shipping
+        $shipping = $order->Shipping;
+        $shippingprovince = Province::orderBy($selfield)->get();
+        $shippingamphure = getAmphureByProvinceName($shippingprovince,$shipping->province,$selfield);
+        $shippingdistrict = getDistrictByAmphureName($shippingamphure,$shipping->amphure,$selfield);
+        //Billing
+        $billingprovince = $shippingprovince;
+        $billing = $order->Billing;
+        $billingamphure = getAmphureByProvinceName($billingprovince,$billing->province,$selfield);
+        $billingdistrict = getDistrictByAmphureName($billingamphure,$billing->amphure,$selfield);
+        return view('Admins.order.form',['navsel' => 'order','mode' => 'edit','order' => $order,'orderItems'=>$orderItems,'billing'=>$billing,'shipping'=>$shipping,'customer'=>$customer,'shipprovince'=>$shippingprovince,'shipamphure'=>$shippingamphure,'shipdistrict'=>$shippingdistrict,'billprovince'=>$billingprovince,'billamphure'=>$billingamphure,'billdistrict'=>$billingdistrict]);
     }
 
     public function checkAlias(Request $request){

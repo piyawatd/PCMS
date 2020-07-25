@@ -25,11 +25,15 @@ class Order extends Model
     public function getShippingAttribute()
     {
 
-        return OrderAddress::where("order",$this->id)->Where("type","shipping")->get();
+        return OrderAddress::where("order",$this->id)
+            ->Where("type","shipping")
+            ->first();
     }
 
     public function getBillingAttribute()
     {
-        return OrderAddress::where("order",$this->id)->Where("type","billing")->get();
+        return OrderAddress::where("order",$this->id)
+            ->Where("type","billing")
+            ->first();
     }
 }

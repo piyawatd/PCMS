@@ -77,6 +77,10 @@ class WebController extends Controller
         $order->note = 'note';
         $order->total = 10000;
         $order->grand_total = 10000;
+        $order->discount = 0;
+        $order->discountpercent = 0;
+        $order->net = 10000;
+        $order->local = App::getLocale();
         $order->save();
         if(session()->has('cart')){
             $cart = session()->get('cart');

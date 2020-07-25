@@ -39,6 +39,5 @@
     <label for="phone" class="col-md-2 col-form-label">เบอร์โทรศัพท์</label>
     <div class="col-md-10">
         <input type="text" class="form-control" id="phone" name="phone" placeholder="เบอร์โทรศัพท์" value="{{$customer->phone}}">
-        <input type="hidden" class="form-control" id="local" name="local" value="{{$customer->local}}">
     </div>
 </div>

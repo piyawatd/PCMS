@@ -35,7 +35,7 @@ class CustomerController extends Controller
         $shippingdistrict = [];
         //billing
         $billing = new Addresses();
-        $billingprovince = Province::orderBy('name_th')->get();
+        $billingprovince = $shippingprovince;
         $billingamphure = [];
         $billingdistrict = [];
         return view('Admins.customer.form',['navsel' => 'customer','mode' => 'new','customer' => $customer,'shipping'=>$shipping,'billing'=>$billing,'shipprovince'=>$shippingprovince,'shipamphure'=>$shippingamphure,'shipdistrict'=>$shippingdistrict,'billprovince'=>$billingprovince,'billamphure'=>$billingamphure,'billdistrict'=>$billingdistrict]);
@@ -58,22 +58,18 @@ class CustomerController extends Controller
         }
         //shipping
         $shipping = $customer->shipping;
-        $shippingprovince = Province::all();
+        $shippingprovince = Province::orderBy($selfield)->get();
         if(!$shipping){
             $shipping = new Addresses();
-            $shippingamphure = getAmphureByProvinceId($shippingprovince[0]->id);
-            $shippingdistrict = getDistrictByAmphureId($shippingamphure[0]->id);
         }else{
             $shippingamphure = getAmphureByProvinceName($shippingprovince,$shipping->province,$selfield);
             $shippingdistrict = getDistrictByAmphureName($shippingamphure,$shipping->amphure,$selfield);
         }
         //billing
         $billing = $customer->billing;
-        $billingprovince = Province::all();
+        $billingprovince = $shippingprovince;
         if(!$billing){
             $billing = new Addresses();
-            $billingamphure = getAmphureByProvinceId($billingprovince[0]->id);
-            $billingdistrict = getDistrictByAmphureId($billingamphure[0]->id);
         }else{
             $billingamphure = getAmphureByProvinceName($billingprovince,$billing->province,$selfield);
             $billingdistrict = getDistrictByAmphureName($billingamphure,$billing->amphure,$selfield);

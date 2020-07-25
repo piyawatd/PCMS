@@ -43,6 +43,21 @@ class CreateOrdersTable extends Migration
                 ->nullable(true)
                 ->default(0)
                 ->comment('จำนวนเงินหลังหักคูปอง');
+            $table->double('discount')
+                ->nullable(true)
+                ->default(0)
+                ->comment('ส่วนลดจำนวนเงิน');
+            $table->integer('discountpercent')
+                ->nullable(true)
+                ->default(0)
+                ->comment('ส่วนลดเปอร์เซ็นต์');
+            $table->double('net')
+                ->nullable(true)
+                ->default(0)
+                ->comment('จำนวนเงินสุทธิ');
+            $table->string('local')
+                ->nullable(true)
+                ->comment('ภาษา');
             $table->boolean('status')
                 ->nullable(true)
                 ->default(true)
