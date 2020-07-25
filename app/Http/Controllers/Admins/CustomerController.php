@@ -26,7 +26,19 @@ class CustomerController extends Controller
     }
 
     public function new(){
-        return view('Admins.customer.form',['navsel' => 'customer','mode' => 'new','customer' => new Customer]);
+        $customer = new Customer();
+        $customer->local = 'th';
+        //shipping
+        $shipping = new Addresses();
+        $shippingprovince = Province::all();
+        $shippingamphure = [];
+        $shippingdistrict = [];
+        //billing
+        $billing = new Addresses();
+        $billingprovince = Province::all();
+        $billingamphure = [];
+        $billingdistrict = [];
+        return view('Admins.customer.form',['navsel' => 'customer','mode' => 'new','customer' => $customer,'shipping'=>$shipping,'billing'=>$billing,'shipprovince'=>$shippingprovince,'shipamphure'=>$shippingamphure,'shipdistrict'=>$shippingdistrict,'billprovince'=>$billingprovince,'billamphure'=>$billingamphure,'billdistrict'=>$billingdistrict]);
     }
 
     public function edit($id){
@@ -66,7 +78,7 @@ class CustomerController extends Controller
             $billingamphure = getAmphureByProvinceName($billingprovince,$billing->province,$selfield);
             $billingdistrict = getDistrictByAmphureName($billingamphure,$billing->amphure,$selfield);
         }
-        return view('Admins.customer.form',['navsel' => 'customer','mode' => 'edit','customer' => $customer]);
+        return view('Admins.customer.form',['navsel' => 'customer','mode' => 'edit','customer' => $customer,'shipping'=>$shipping,'billing'=>$billing,'shipprovince'=>$shippingprovince,'shipamphure'=>$shippingamphure,'shipdistrict'=>$shippingdistrict,'billprovince'=>$billingprovince,'billamphure'=>$billingamphure,'billdistrict'=>$billingdistrict]);
     }
 
     public function checkEmail(Request $request){
