@@ -89,6 +89,7 @@ class WebController extends Controller
                 $orderItem->order = $order->id;
                 $orderItem->title_th = $cart[$key]['title_th'];
                 $orderItem->title_en = $cart[$key]['title_en'];
+                $orderItem->sku = $cart[$key]['sku'];
                 $orderItem->quantity = $cart[$key]['quantity'];
                 $orderItem->price = $cart[$key]['price'];
                 $orderItem->totalline = $cart[$key]['quantity'] * $cart[$key]['price'];
@@ -138,6 +139,7 @@ class WebController extends Controller
                 }else{
                     $item['title'] = $cart[$key]['title_en'];
                 }
+                $item['sku'] = $cart[$key]['sku'];
                 $item['quantity'] = $cart[$key]['quantity'];
                 $item['price'] = $cart[$key]['price'];
                 $item['thumbnail'] = $cart[$key]['thumbnail'];
@@ -173,6 +175,7 @@ class WebController extends Controller
                     "id" => $id,
                     "title_th" => $product->title_th,
                     "title_en" => $product->title_en,
+                    "sku" => $product->sku,
                     "quantity" => 1,
                     "price" => $product->price,
                     "thumbnail" => $product->thumbnail
@@ -194,6 +197,7 @@ class WebController extends Controller
             "title_th" => $product->title_th,
             "title_en" => $product->title_en,
             "quantity" => 1,
+            "sku" => $product->sku,
             "price" => $product->price,
             "thumbnail" => $product->thubmnail
         ];

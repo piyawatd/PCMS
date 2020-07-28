@@ -24,7 +24,7 @@
         <input type="text" class="form-control" id="firstname" name="firstname" placeholder="ชื่อ" value="{{$customer->firstname}} {{$customer->lastname}}" required>
     </div>
     <div class="col-md-2">
-        <a href="#" class="btn-primary btn">Browse</a>
+        <a href="javascript:openmodalcustomer()" class="btn-primary btn">Browse</a>
     </div>
 </div>
 <div class="form-group row">

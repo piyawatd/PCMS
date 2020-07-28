@@ -16,6 +16,9 @@ class CreateOrderItemsTable extends Migration
         $tableName = 'order_items';
         Schema::create($tableName, function (Blueprint $table) {
             $table->id();
+            $table->string('sku')
+                ->nullable(false)
+                ->comment('sku product');
             $table->string('title_th')
                 ->nullable(false)
                 ->comment('title ภาษาไทย');

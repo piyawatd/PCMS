@@ -25,3 +25,11 @@ function isEmail(email) {
 function elpath(path) {
 	return btoa(path).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '.').replace(/\.+$/, '')
 }
+
+function numberf(amount){
+    return new Intl.NumberFormat('en-US', {
+        style: 'decimal',
+        currency: 'USD',
+        minimumFractionDigits: 0
+    }).format(amount)
+}
