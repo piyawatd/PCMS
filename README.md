@@ -14,11 +14,12 @@ Multi language cms use laravel framework.
 - jquery confirm v3.3.4 [Document](https://craftpip.github.io/jquery-confirm/)
 
 ## Command
-หลังจาก clone project แล้วใช้คำสั่ง
+หลังจาก clone project ลบไฟล์ `composer.lock` และ folder `vendor` แล้วใช้คำสั่ง
 
+- Copy and edit .env file from .env.example `cp .env.example .env`
+- config database in .env
 - Install composer `composer install` 
 - Install npm package `npm install`
-- Copy and edit .env file from .env.example `cp .env.example .env`
 - Generate project key `php artisan key:generate`
 
 ## Laravel Command
