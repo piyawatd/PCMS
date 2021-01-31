@@ -4,7 +4,7 @@ Multi language cms use laravel framework.
 
 ## Requirements
 
-- Laravel 7.0.7
+- Laravel 7.30.4
 - elFinder 2.1.50
 - ckeditor 4.13.0
 - Bootstrap - SB Admin 2 v4.0.7 [Overview](https://startbootstrap.com/template-overviews/sb-admin-2)
