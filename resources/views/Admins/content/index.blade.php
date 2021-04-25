@@ -15,19 +15,30 @@
                     </span>
             <span class="text">เพิ่ม</span>
         </a>
-
-
     </div>
-
     <!-- Content Row -->
+    <div class="row">
+        <form>
+            <div class="form-group row">
+                <label for="category" class="col-md-4 col-form-label">หมวด</label>
+                <div class="col-md-8">
+                    <select class="form-control" id="category" name="category">
+                        @foreach ($category as $item)
+                            <option value="{{ $item->id }}">{{ $item->name_th }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="row">
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th>ชื่อภาษาไทย</th>
-                    <th>ชื่อภาษาอังกฤษ</th>
-                    <th>Alias</th>
+                    <th class="col-md-3">ชื่อภาษาไทย</th>
+                    <th class="col-md-3">ชื่อภาษาอังกฤษ</th>
+                    <th class="col-md-3">Alias</th>
                     <th class="col-md-1">Publish</th>
                     <th class="col-md-2"></th>
                 </tr>
@@ -42,6 +53,9 @@
     <script type="text/javascript">
         var oTable = '';
         $(document).ready(function () {
+            $('#category').change(function(){
+                clearall();
+            })
             createtable();
         });
 
@@ -54,7 +68,7 @@
                 "serverSide": true,
                 "pageLength": 25,
                 "ajax":{
-                    "url": "{{ route('admincontentlist') }}",
+                    "url": "{{ route('admincontentlist') }}?category="+$('#category').val(),
                     "dataType": "json",
                     "type": "GET",
                     "data":{ _token: "{{csrf_token()}}"}

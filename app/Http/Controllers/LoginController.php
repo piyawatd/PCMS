@@ -23,9 +23,9 @@ class LoginController extends Controller
             // Authentication passed...
             $use = Auth::user();
             if($use->role == 'admin'){
-                return redirect()->route('adminindex')->with('success', 'Login success.');
+                return redirect()->route('adminproduct')->with('success', 'Login success.');
             }else{
-                return redirect()->route('orderindex')->with('success', 'Login success.');
+                return redirect()->route('adminproduct')->with('success', 'Login success.');
             }
         }else{
             return redirect()->route('login')->with('error', 'Username or Password is wrong.');

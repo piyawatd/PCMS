@@ -17,58 +17,67 @@ use Auth;
 
 class UserController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
-
-    public function index(){
-        return view('Admins.user.index',['navsel'=>'user']);
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 
-    public function new(){
+    public function index()
+    {
+        return view('Admins.user.index', ['navsel' => 'user']);
+    }
+
+    public function new()
+    {
         $user = new User();
         $user->role = 'staff';
-        return view('Admins.user.form',['navsel' => 'user','mode' => 'new','user' => $user]);
+        return view('Admins.user.form', ['navsel' => 'user', 'mode' => 'new', 'user' => $user]);
     }
 
-    public function edit($id){
-        return view('Admins.user.form',['navsel' => 'user','mode' => 'edit','user' => User::find($id)]);
+    public function edit($id)
+    {
+        return view('Admins.user.form', ['navsel' => 'user', 'mode' => 'edit', 'user' => User::find($id)]);
     }
 
-    public function profile(){
-        return view('Admins.user.profile',['navsel' => 'profile','user' => User::find(Auth::id())]);
+    public function profile()
+    {
+        return view('Admins.user.profile', ['navsel' => 'profile', 'user' => User::find(Auth::id())]);
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         $user = new User();
-        $this->updateDatabase($user,$request);
+        $this->updateDatabase($user, $request);
         return redirect()->route('userindex')->with('success', 'user saved!');
     }
 
-    public function checkUsername(Request $request){
-        $check = User::where('username',$request->input('username'))->count();
+    public function checkUsername(Request $request)
+    {
+        $check = User::where('username', $request->input('username'))->count();
         $result['result'] = false;
-        if($check > 0){
+        if ($check > 0) {
             $result['result'] = true;
         }
         return $result;
     }
 
-    public function update($id,Request $request){
+    public function update($id, Request $request)
+    {
         $user = User::find($id);
-        $this->updateDatabase($user,$request);
+        $this->updateDatabase($user, $request);
         return redirect()->route('userindex')->with('success', 'user updated!');
     }
 
-    public function updateprofile(Request $request){
+    public function updateprofile(Request $request)
+    {
         $user = User::find(Auth::id());
-        $this->updateDatabase($user,$request);
+        $this->updateDatabase($user, $request);
         return redirect()->route('userindex')->with('success', 'Profile updated!');
     }
 
-    public function updateDatabase(User $user,Request $request){
-        if (!empty($request->input('password'))){
+    public function updateDatabase(User $user, Request $request)
+    {
+        if (!empty($request->input('password'))) {
             $user->password = Hash::make($request->input('password'));
         }
         $user->username = $request->input('username');
@@ -78,21 +87,21 @@ class UserController extends Controller
         $user->save();
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $user = User::find($id);
         $user->delete();
         $result['result'] = true;
         return $result;
     }
 
-    public function all(Request $request)
+    public function list(Request $request)
     {
         // https://shareurcodes.com/blog/laravel%20datatables%20server%20side%20processing
         $columns = array(
             0 => 'username',
             1 => 'name',
             2 => 'email',
-            3 => 'role'
         );
 
         $totalData = User::count();
@@ -104,54 +113,46 @@ class UserController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
 
-        if(empty($request->input('search.value')))
-        {
+        if (empty($request->input('search.value'))) {
             $users = User::offset($start)
                 ->limit($limit)
-                ->orderBy($order,$dir)
+                ->orderBy($order, $dir)
                 ->get();
-        }
-        else {
+        } else {
             $search = $request->input('search.value');
 
-            $users =  User::where('username','LIKE',"%{$search}%")
-                ->orWhere('name', 'LIKE',"%{$search}%")
-                ->orWhere('email', 'LIKE',"%{$search}%")
+            $users = User::where('username', 'LIKE', "%{$search}%")
+                ->orWhere('name', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%")
                 ->offset($start)
                 ->limit($limit)
-                ->orderBy($order,$dir)
+                ->orderBy($order, $dir)
                 ->get();
 
-            $totalFiltered = User::where('username','LIKE',"%{$search}%")
-                ->orWhere('name', 'LIKE',"%{$search}%")
-                ->orWhere('email', 'LIKE',"%{$search}%")
+            $totalFiltered = User::where('username', 'LIKE', "%{$search}%")
+                ->orWhere('name', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%")
                 ->count();
         }
 
         $data = array();
-        if(!empty($users))
-        {
-            foreach ($users as $user)
-            {
-                $edit =  route('useredit',$user->id);
-
-                $nestedData['id'] = $user->id;
+        if (!empty($users)) {
+            foreach ($users as $user) {
+                $edit = route('useredit', $user->id);
                 $nestedData['username'] = $user->username;
                 $nestedData['name'] = $user->name;
                 $nestedData['email'] = $user->email;
                 $nestedData['role'] = $user->role;
-                $nestedData['options'] = "&emsp;<a href='{$edit}' title='แก้ไข' class='btn btn-default'><span class='glyphicon glyphicon-edit'></span></a>
-                                          &emsp;<a href='javascript:void(0);' title='ลบ' class='btn btn-danger'><span class='glyphicon glyphicon-trash' onclick=\"deleteitem('".$user->id."','".$user->title."');\"></span></a>";
+                $nestedData['options'] = "<a href=" . $edit . " title=\"แก้ไข\" class=\"btn btn-info btn-circle\"><i class=\"fas fa-edit\"></i></a>&emsp;<a href=\"javascript:deleteitem('" . $user->id . "','" . $user->username . "');\" title=\"ลบ\" class=\"btn btn-danger btn-circle\"><i class=\"fas fa-trash\"></i></a>";
                 $data[] = $nestedData;
-
             }
         }
 
         $json_data = array(
-            "draw"            => intval($request->input('draw')),
-            "recordsTotal"    => intval($totalData),
+            "draw" => intval($request->input('draw')),
+            "recordsTotal" => intval($totalData),
             "recordsFiltered" => intval($totalFiltered),
-            "data"            => $data
+            "data" => $data
         );
 
         echo json_encode($json_data);

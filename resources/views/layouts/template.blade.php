@@ -1,120 +1,179 @@
+<?php
+$route = Route::currentRouteName();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Piyawat Damrongsuphakit">
-
-    <title>@yield('title')</title>
+    <title>BNC Supply : @yield('title')</title>
     <!-- Bootstrap Core CSS -->
     @yield('meta')
     @include('layouts.inc-stylesheet')
     @yield('stylesheet')
 </head>
-<body id="page-top">
-<!-- Page Wrapper -->
-<div id="wrapper">
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-        <!-- Main Content -->
-        <div id="content">
-            <!-- Topbar -->
-        @include('layouts.inc-navbar')
-        <!-- End of Topbar -->
-            <!-- Message -->
-                @if ($message = Session::get('success'))
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 align-self-center">
-                                <div class="alert alert-success" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-            @if ($message = Session::get('error'))
+<body>
+    <!-- #site-wrapper start -->
+    @if($route === 'home')
+    <div id="site-wrapper" class="site-wrapper home-main">
+    @endif
+    @if($route === 'product')
+    <div id="site-wrapper" class="site-wrapper blog-listing blog-listing-grid">
+    @endif
+    @if($route === 'productdetail')
+    <div id="site-wrapper" class="site-wrapper page-shop page-single-product">
+    @endif
+    @if($route === 'client')
+    <div id="site-wrapper" class="site-wrapper blog-listing blog-listing-grid">
+    @endif
+    @if($route === 'clientdetail')
+    <div id="site-wrapper" class="site-wrapper single-blog single-blog-image">
+    @endif
+    @if($route === 'career')
+    <div id="site-wrapper" class="site-wrapper explore-sidebar explore-sidebar-list">
+    @endif
+    @if($route === 'careerdetail')
+    <div id="site-wrapper" class="site-wrapper explore-details explore-details-gallery bg-gray-06">
+    @endif
+    @if($route === 'aboutus')
+    <div id="site-wrapper" class="site-wrapper explore-details explore-details-gallery bg-gray-06">
+    @endif
+
+
+        <!-- #header start -->
+        @include('layouts.inc-header')
+        <!-- #wrapper-content start -->
+        <!-- content-wrapper start -->
+        @if($route === 'home')
+            @include('layouts.inc-slider')
+            <div class="content-wrap">
+                @yield('content')
+            </div>
+        @endif
+        @if($route === 'product')
+        <!-- #page-title start -->
+            <div id="page-title" class="page-title page-title-style-background">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 align-self-center">
-                            <div class="alert alert-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </div>
+                    <div class="h-100 d-flex align-items-center">
+                        <div class="mb-2">
+                            <h1 class="mb-0" data-animate="fadeInDown">
+                                <span class="font-weight-light">@lang('web_product.product')</span>
+                            </h1>
+                            <ul class="breadcrumb breadcrumb-style-01" data-animate="fadeInUp">
+                                <li class="breadcrumb-item"><a href="{{route('home')}}" class="link-hover-dark-primary">@lang('web_product.home')</a></li>
+                                <li class="breadcrumb-item"><span>@lang('web_product.product')</span></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-            @endif
-            <!-- End of Message -->
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                @yield('content')
             </div>
-        </div>
+            <div id="wrapper-content" class="wrapper-content">
+                <div class="container">
+                    @yield('content')
+                </div>
+            </div>
+            <!-- #page-title end -->
+        @endif
+        @if($route === 'productdetail')
+        <!-- #page-title start -->
+            <div id="page-title" class="page-title py-6">
+                <div class="container">
+                    <div class="h-100 ">
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/" class="text-decoration-none">@lang('web.home')</a></li>
+                            <li class="breadcrumb-item"><a href="/product" class="text-decoration-none">{{ $category->name }} </a></li>
+                            <li class="breadcrumb-item"><span> {{$product->title}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #page-title end -->
+            <div id="wrapper-content" class="wrapper-content">
+                <div class="container">
+                    @yield('content')
+                </div>
+            </div>
+        @endif
+        @if($route === 'client')
+        <!-- #page-title start -->
+            <div id="page-title" class="page-title page-title-style-background">
+                <div class="container">
+                    <div class="h-100 d-flex align-items-center">
+                        <div class="mb-2">
+                            <h1 class="mb-0" data-animate="fadeInDown">
+                                <span class="font-weight-light">@lang('web.client')</span>
+                            </h1>
+                            <ul class="breadcrumb breadcrumb-style-01" data-animate="fadeInUp">
+                                <li class="breadcrumb-item"><a href="{{route('home')}}" class="link-hover-dark-primary">@lang('web.home')</a></li>
+                                <li class="breadcrumb-item"><span>@lang('web.client')</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="wrapper-content" class="wrapper-content">
+                <div class="container">
+                    @yield('content')
+                </div>
+            </div>
+            <!-- #page-title end -->
+        @endif
+        @if($route === 'clientdetail')
+            <div id="wrapper-content" class="wrapper-content pb-13">
+                <div class="container">
+                    @yield('content')
+                </div>
+            </div>
+        @endif
+        @if($route === 'career')
+        <!-- #page-title start -->
+            <div id="wrapper-content" class="wrapper-content bg-gray-04 pb-0">
+                <div class="container">
+                    <ul class="breadcrumb breadcrumb-style-02 py-7">
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">@lang('web.home')</a></li>
+                        <li class="breadcrumb-item">@lang('web.career')</li>
+                    </ul>
+                    <div class="page-container row">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+            <!-- #page-title end -->
+        @endif
+        @if($route === 'careerdetail')
+            <div id="wrapper-content" class="wrapper-content pb-0 pt-0 ">
+                <div class="page-wrapper bg-white">
+                    <div class="container">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        @endif
+        @if($route === 'aboutus')
+            <div id="wrapper-content" class="wrapper-content pb-0 pt-0 ">
+                <div class="page-wrapper bg-white">
+                    <div class="container">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+        @endif
+        @if($route === 'notfound')
+            <div id="wrapper-content" class="wrapper-content pt-0 pb-0">
+                <div class="container">
+                    @yield('content')
+                </div>
+            </div>
+        @endif
+        <!-- .content-wrapper end -->
+        <!-- #wrapper-content end -->
+        @include('layouts.inc-footer')
     </div>
-</div>
-<!-- End of Page Wrapper -->
-@include('layouts.inc-scripts')
-@yield('scripts')
-<script type="text/javascript">
-    loadCart();
-    activeCart();
-
-    function changeLanguage(language) {
-        $.ajax({
-            url:'/lang/'+language,
-            method:"GET",
-            success:function(result){
-                location.reload()
-            }
-        })
-    }
-
-    function activeCart() {
-        $('#cartDropdown').hover(function () {
-            $('#viewcart').show();
-        }, function () {
-            $('#viewcart').hide();
-        })
-        $('#viewcart').hover(function () {
-            $('#viewcart').show();
-        }, function () {
-            $('#viewcart').hide();
-        })
-    }
-
-    function loadCart() {
-        $('#viewcart').html('');
-        $.ajax({
-            url: '{{ route('viewcart') }}',
-            method: "GET",
-            success: function (response) {
-                // console.log(response.total)
-                if (response.cart.length > 0) {
-                    $('#numberItemCart').text(response.cart.length);
-                    $('#viewcart').append('<h6 class="dropdown-header">Cart</h6>');
-                }else{
-                    $('#numberItemCart').text('0');
-                }
-                $.each(response.cart, function (key, value) {
-                    // console.log(value.id)
-                    // console.log(value.title)
-                    // console.log(value.quantity)
-                    // console.log(value.price)
-                    // console.log(value.thumbnail)
-                    // console.log(value.total)
-                    var strcart = '<a class="dropdown-item d-flex align-items-center" href="#">\n' +
-                        '<div class="dropdown-list-image col-md-2">' +
-                        '<img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"></div>'+
-                        '<div class="text-truncate col-md-9">'+value.title+'</div>' +
-                        '<div class="border-left text-center col-md-1">'+value.quantity+'</div></a>';
-                    $('#viewcart').append(strcart);
-                    $('#viewcart').append('<a class="dropdown-item text-center small text-gray-500" href="#">View More</a>');
-                })
-            }
-        })
-    }
-</script>
+    {{--@include('layouts.inc-widget')--}}
+    <!-- End of Page Wrapper -->
+    @include('layouts.inc-scripts')
+    @yield('scripts')
 </body>
 </html>

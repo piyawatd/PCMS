@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\App;
 
 class FileManagerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function manager(){
         return view('Admins.el.manager',['navsel' => 'file']);
     }

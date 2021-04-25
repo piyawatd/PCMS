@@ -1,14 +1,10 @@
 /*All*/
 @font-face {
-    font-family: 'jasmindara';
-    src: url('../fonts/jasmindara.ttf')  format('truetype'); /* Safari, Android, iOS */
-}
-@font-face {
-    font-family: 'ekkamaistandard';
-    src: url('../fonts/EkkamaiStandard-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+    font-family: 'Work Sans';
+    src: url('../fonts/WorkSans-VariableFont_wght.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
 body {
-    font-family: 'ekkamaistandard';
+    font-family: 'Work Sans';
 }
 .font-family-normal {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif!important;

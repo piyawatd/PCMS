@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\App;
 
 class CategoryContentController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(){
         return view('Admins.categorycontent.index',['navsel'=>'categorycontent']);

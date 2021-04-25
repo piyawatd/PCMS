@@ -21,7 +21,17 @@ Route::get('/mobile', function () {
     return view('web.samplemobile');
 });
 Route::get('', 'WebController@index')->name('home');
-Route::get('product/{alias}', 'WebController@product')->name('product');
+Route::get('product', 'WebController@product')->name('product');
+Route::get('product/{alias}', 'WebController@productdetail')->name('productdetail');
+Route::get('categoryproduct/{alias}', 'WebController@categoryproduct')->name('categoryproduct');
+Route::get('content/{alias}', 'WebController@contentdetail')->name('contentdetail');
+Route::get('categorycontent/{alias}', 'WebController@categorycontent')->name('categorycontent');
+Route::get('client', 'WebController@client')->name('client');
+Route::get('client/{alias}', 'WebController@clientdetail')->name('clientdetail');
+Route::get('clientcontent/{alias}', 'WebController@clientcontent')->name('clientcontent');
+Route::get('aboutus', 'WebController@aboutus')->name('aboutus');
+Route::get('career', 'WebController@career')->name('career');
+Route::get('career/{alias}', 'WebController@careerdetail')->name('careerdetail');
 //Contact Us
 Route::get('contactus', 'WebController@contactus')->name('contactus');
 Route::post('contactussave', 'WebController@contactussave')->name('contactussave');
@@ -40,6 +50,7 @@ Route::get('/lang/{key}', function ($key) {
     session()->put('locale', $key);
     return redirect()->back();
 });
+Route::get('notfound', 'WebController@notfound')->name('notfound');
 
 Route::prefix('member')->group(function () {
     Route::get('', 'Member\MemberController@index')->name('memberindex');
@@ -53,8 +64,8 @@ Route::get('/test', 'FormControlController@index');
 Route::post('file/upload', 'FormControlController@upload')->name('file.upload');
 
 Route::prefix('admins')->group(function () {
-    Route::get('', 'Admins\AdminController@index')->name('adminindex');
-
+//    Route::get('', 'Admins\AdminController@index')->name('adminindex');
+    Route::get('', 'Admins\ProductController@index')->name('adminindex');
 //    Category
     Route::prefix('category')->group(function () {
         Route::get('', 'Admins\CategoryController@index')->name('admincategory');
@@ -134,11 +145,11 @@ Route::prefix('admins')->group(function () {
         Route::get('edit/{id}', 'Admins\UserController@edit')->name('useredit');
         Route::get('profile', 'Admins\UserController@profile')->name('userprofile');
         Route::post('updateprofile', 'Admins\UserController@updateprofile')->name('userupdateprofile');
-        Route::get('userall', 'Admins\UserController@all')->name('userall');
         Route::post('create', 'Admins\UserController@create')->name('usercreate');
         Route::post('update/{id}', 'Admins\UserController@update')->name('userupdate');
         Route::delete('delete/{id}', 'Admins\UserController@delete')->name('userdelete');
         Route::get('checkUsername', 'Admins\UserController@checkUsername')->name('usercheckUsername');
+        Route::get('list', 'Admins\UserController@list')->name('userlist');
     });
 //    File
     Route::prefix('file')->group(function() {

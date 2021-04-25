@@ -21,6 +21,11 @@ use Illuminate\Support\Facades\App;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
         return view('Admins.customer.index',['navsel'=>'customer']);
     }

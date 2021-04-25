@@ -5,26 +5,27 @@
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3">Admin</div>
   </a>
 
   <!-- Divider -->
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item @if ($navsel===
-                'dashboard') active @endif">
-    <a class="nav-link" href="{{ route('adminindex') }}">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Dashboard</span></a>
-  </li>
+  {{--<li class="nav-item @if ($navsel===--}}
+                {{--'dashboard') active @endif">--}}
+    {{--<a class="nav-link" href="{{ route('adminindex') }}">--}}
+      {{--<i class="fas fa-fw fa-tachometer-alt"></i>--}}
+      {{--<span>Dashboard</span></a>--}}
+  {{--</li>--}}
     <li class="nav-item @if ($navsel===
                 'content') active @endif">
         <a class="nav-link" href="{{ route('admincontent') }}">
             <i class="far fa-file-alt"></i>
             <span>บทความ</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item @if ($navsel===
+                'product') active @endif">
         <a class="nav-link" href="{{ route('adminproduct') }}">
             <i class="fab fa-product-hunt"></i>
             <span>สินค้า</span></a>
@@ -65,13 +66,13 @@
     </li>
 
 
+    {{--<li class="nav-item">--}}
+        {{--<a class="nav-link" href="{{ route('adminindex') }}">--}}
+            {{--<i class="fas fa-tags"></i>--}}
+            {{--<span>Coupon</span></a>--}}
+    {{--</li>--}}
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('adminindex') }}">
-            <i class="fas fa-tags"></i>
-            <span>Coupon</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('adminindex') }}">
+        <a class="nav-link" target="_blank" href="{{ route('filemanager') }}">
             <i class="fas fa-folder-open"></i>
             <span>Asset Manager</span></a>
     </li>
@@ -85,15 +86,15 @@
 
   <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('adminindex') }}">
+        <a class="nav-link" href="{{ route('userindex') }}">
             <i class="fas fa-user-lock"></i>
             <span>User</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('adminindex') }}">
-            <i class="fas fa-user-lock"></i>
-            <span>SEO</span></a>
-    </li>
+    {{--<li class="nav-item">--}}
+        {{--<a class="nav-link" href="{{ route('adminindex') }}">--}}
+            {{--<i class="fas fa-user-lock"></i>--}}
+            {{--<span>SEO</span></a>--}}
+    {{--</li>--}}
 
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">

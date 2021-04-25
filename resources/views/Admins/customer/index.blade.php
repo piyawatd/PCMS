@@ -1,6 +1,6 @@
 @extends('Admins.layouts.template')
 @section('title')
-    SB Admin 2 - หมวดสินค้า
+    SB Admin 2 - สมาชิก
 @endsection
 @section('stylesheet')
     <link href="{{asset('/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">

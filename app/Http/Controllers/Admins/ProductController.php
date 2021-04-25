@@ -18,13 +18,14 @@ use Illuminate\Support\Facades\App;
 
 class ProductController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(){
-        return view('Admins.product.index',['navsel'=>'product']);
+        $category = Category::where('status',1)->get();
+        return view('Admins.product.index',['navsel'=>'product','category'=>$category]);
     }
 
     public function new(){
@@ -148,7 +149,9 @@ class ProductController extends Controller
             3 => 'id',
         );
 
-        $totalData = Product::where('status',true)->count();
+        $totalData = Product::where('status',true)
+            ->where('category',$request->input('category'))
+            ->count();
 
         $totalFiltered = $totalData;
 
@@ -160,6 +163,7 @@ class ProductController extends Controller
         if(empty($request->input('search.value')))
         {
             $products = Product::where('status',true)
+                ->where('category',$request->input('category'))
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order,$dir)
@@ -169,6 +173,7 @@ class ProductController extends Controller
             $search = $request->input('search.value');
 
             $products =  Product::where('status',true)
+                ->where('category',$request->input('category'))
                 ->orWhere('title_th', 'LIKE',"%{$search}%")
                 ->orWhere('title_en', 'LIKE',"%{$search}%")
                 ->orWhere('alias', 'LIKE',"%{$search}%")

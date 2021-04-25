@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\App;
 class AdminController extends Controller
 {
 
-/*
+
 	public function __construct()
     {
         $this->middleware('auth');
     }
-*/
+
 	public function index(){
 	    App::setLocale('th');
         session(['page' => 'index']);
-        return view('Admins.admin.index',['navsel'=>'dashboard']);
+        return view('Admins.product.index',['navsel'=>'product']);
     }
 
 	public function table(){
